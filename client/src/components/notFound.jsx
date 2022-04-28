@@ -2,7 +2,7 @@
 import React from "react";
 //"../styles/NotFound.css";
 import { Link } from "react-router-dom";
-
+//owo
 export default function LandingPage() {
     return (
       <div className="notFound">
