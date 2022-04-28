@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/LandingPage.css";
-import "../assets/harshfood.png"
+
 
 export default function LandingPage() {
   return (
@@ -22,4 +22,4 @@ export default function LandingPage() {
       
     </div>
   );
-}
+} //owo
