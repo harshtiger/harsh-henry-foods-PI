@@ -4,6 +4,11 @@ import LandingPage from "./components/LandingPage";
 import Home from "./components/Home";
 import Detail from "./components/Detail";
 import RecipeCreate from "./components/RecipeCreate";
+import notFound from "./components/notFound.jsx";
+// owo
+
+/*<Route path="/about" component={<About />} />
+          */
 
 function App() {
   return (
@@ -14,6 +19,9 @@ function App() {
           <Route exact path="/home" component={Home} />
           <Route path="/home/:id" component={Detail} />
           <Route path="/recipe" component={RecipeCreate} />
+          <Route path="*" component={notFound} />
+
+          
         </Switch>
       </div>
     </BrowserRouter>
