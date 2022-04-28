@@ -1,0 +1,175 @@
+body {
+ 
+  width: 100%;
+  position: absolute;
+  
+  background-image: url("../assets/bkgCreate.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  
+  font-family:Arial, Helvetica, sans-serif ;
+  color: red;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.create button {
+ 
+  color: rgb(0, 0, 0);
+  width: 90%;
+  max-width: 400px;
+}
+.create button:hover {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  border: 2px outset rgba(0, 0, 0, 0.8);
+}
+.buttonToHome {
+  
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  
+  height: 55px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  background-color: rgb(255, 255, 255);
+  font-size: 17px;
+  width: 90%;
+  max-width: 400px;
+  
+  
+ 
+
+  
+}
+
+.create h1 {
+  display: flex;
+  justify-content: center;
+  margin-top: 0px;
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 40px;
+  text-shadow: rgb(19, 19, 18) -3px 1px;
+  font-family:Arial, Helvetica, sans-serif ;
+  color: rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0, 0.685);
+  width: fit-content;
+  height: fit-content;
+  padding: 1%;
+  border-radius: 15px;
+  
+}
+
+.create form {
+  background-color: rgba(0, 0, 0, 0.685);
+  width: 90%;
+  max-width: 400px;
+  margin-top: auto;
+  padding: 5px 35px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 15px;
+  margin-left: auto;
+  margin-right: auto;
+
+ 
+}
+.form-title{
+  color: white;
+}
+
+.create h1 img {
+  height: 60px;
+  width: 60px;
+ 
+  
+  margin-left: auto;
+  margin-right: auto;
+
+  display: flex;
+
+  
+}
+.create form label {
+  color: white;
+  margin:15px;
+  margin-top: 30px;
+  padding-top: 20px;
+  
+}
+
+.create form label p {
+  color:white
+}
+
+
+.inputCreate {
+  font-size: 17px;
+  height: 25px;
+  
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+
+  margin:15px;
+
+}
+::placeholder {
+  color: rgb(0, 0, 0);
+}
+
+
+
+
+
+
+.form textarea{
+  resize: none;
+  width: 90%;
+  max-width: 400px;
+  margin:15px;
+}
+
+
+
+
+.dietsCreate button {
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(0, 0, 0);
+  border-radius: 9999px;
+  font-size: 15px;
+  padding: 2px;
+  
+  margin:15px;
+  
+ 
+}
+
+.dietsCreate button:hover {
+  background-color: rgb(126, 123, 126);
+  color: white;
+
+}
+
+.dietsCreate span {
+  color:white;
+  display: block;
+  margin:15px;
+}
+.dietsCreate select{
+  width: 90%;
+  max-width: 400px;
+
+  font-size: 17px;
+  height: 25px;
+  
+  border-radius: 8px;
+  margin:15px;
+
+}
+
