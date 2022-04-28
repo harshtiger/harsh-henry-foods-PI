@@ -1,5 +1,5 @@
 .detail {
-  background-image: url("../assets/bkgDetail.jpg");
+  background-image: url("../assets/bbck.jpg");
  
   background-color: black;
   margin: 0;
@@ -42,7 +42,7 @@
   margin-top: 30px;
   font-size: 35px;
   font-family: "Arial", cursive;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
 }
 
 .detail img {
@@ -59,10 +59,12 @@ h2 {
   display: flex;
   justify-content: left;
   margin-left: 10%;
+  color:white;
 }
 
 .details h3 {
   margin-left: 10%;
+  color: white
   
 }
 

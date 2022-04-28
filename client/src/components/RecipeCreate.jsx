@@ -187,8 +187,8 @@ export default function RecipeCreate() {
             </select>
             {input.diets.map((d, i) => (
               <ul key={i}>
-                <li>{d}</li>
-                <button onClick={(e) => handleDelete(e, d)}>x</button>
+                <p>{d}</p>
+                <button className="btnCreateD" onClick={(e) => handleDelete(e, d)}>x</button>
               </ul>
             ))}
             {errors.diets && <p>{errors.diets}</p>}
