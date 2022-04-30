@@ -16,7 +16,7 @@ const router = Router();
       );
       recipeTitle.length
         ? res.status(200).json(recipeTitle)
-        : res.status(400).send("This recipe doesn't exist");
+        : res.status(400).send("This recipe doesn't exist -.-");
     } else {
       res.status(200).json(recipesTotal);
     }
