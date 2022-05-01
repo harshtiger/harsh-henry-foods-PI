@@ -28,6 +28,7 @@ export default function RecipeCreate() {
   const history = useHistory();
   const diets = useSelector((state) => state.diets);
   const [errors, setErrors] = useState({});
+  
 
   useEffect(() => {
     dispatch(getDiets());
