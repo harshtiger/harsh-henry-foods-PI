@@ -7,12 +7,17 @@ import {
   getTypesOfDiet,
   orderByName,
   orderByScoreLikes,
+  clearError,
  /* getNameRecipe*/
 } from "../../actions";
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Paginate from "../Paginate/Paginate";
 import SearchBar from "../SearchBar/SearchBar";
+import Loading from "../loading/Loading"
+import Modal from "../modal/Modal";
+
+
 import "./Home.css";
 
 
@@ -23,6 +28,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const allRecipes = useSelector((state) => state.recipes);
   const diets = useSelector((state) => state.diets);
+  const error = useSelector(state => state.error);
   //Paginado:
 
 
@@ -43,7 +49,7 @@ export default function Home() {
 
   const [/*orderName*/, setOrderName] = useState("");
   const [/*orderLike*/, setOrderLike] = useState("");
-  const [loading, setLoading] = useState(false);
+ // const [loading, setLoading] = useState(false);
 
 
   /*const getdata = async () => {
@@ -54,6 +60,9 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getRecipes());  // trae todas las recetas
+   
+    
+    
   }, [dispatch]);
   
 
@@ -61,10 +70,17 @@ export default function Home() {
     dispatch(getTypesOfDiet());  // trae los tipos  de  dieta
   }, [dispatch]);
 
+  const clearErrors = () => {
+    dispatch(clearError());
+}
+
   function handleClick(e) {    // con este handle click me traigo todas las recetas
     e.preventDefault();
+    
     dispatch(getRecipes());
+    
   }
+
 
   function handleSelectTypeOfDiet(e) {         
     dispatch(filterByDiet(e.target.value));
@@ -90,15 +106,15 @@ export default function Home() {
     setOrderLike("Order" + e.target.value);
   }
 
-  if (currentRecipes && loading) {
-    setLoading(true);
-  }
+  
 
 
   return (
     <div className="home">
       <h1>pick one for me!!!<img src="https://i.ibb.co/WFBhFLb/Harsh-Stickers1.png" alt="Harsh-Stickers1" border="0" /></h1>
       <SearchBar />
+      {error && <Modal show={true} setShow={clearErrors} message={"No results were found"} />}
+      
       <Link to="/recipe" className="linkCreate">
         <button className="btnCreate">Create your own recipe</button>
       </Link>
@@ -109,14 +125,17 @@ export default function Home() {
           }}
         >
           Show all recipes
+          
         </button>
       </div>
+
+   
       <div className="select">
 
 
         <span className="span">Order by Recipe Name</span>
         <select onChange={(n) => handleSelectByName(n)}>
-          
+          <option value="default">All</option>
           <option value="A-Z">A-Z</option>
           <option value="Z-A">Z-A</option>
         </select>
@@ -151,11 +170,16 @@ export default function Home() {
           paginate={paginate}
         />
       </div>
+      
+
+      
 
 
 
       <div className="cards">
-        {currentRecipes?.map((c) => (
+        {currentRecipes ? 
+         
+        currentRecipes?.map ((c) => (
           <div key={c.id}>
             <Link to={"/home/" + c.id} className="linkCard">
               <Card
@@ -192,9 +216,11 @@ export default function Home() {
                 }
                 score={c.aggregateLikes}
               />
+              
             </Link>
+            
           </div>
-        ))}
+        ))   : <Loading /> } 
       </div>
       
 

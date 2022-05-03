@@ -8,6 +8,9 @@ import {
   GET_DIETS,
   POST_RECIPE,
   GET_DETAIL,
+  ERROR_OCURRED,
+  CLEAR_ERROR
+
 } from "../actions";
 
 const initialState = {
@@ -15,6 +18,7 @@ const initialState = {
   allRecipes: [],
   diets: [],
   detail: [],
+  error:"",
 };
 
 
@@ -26,6 +30,19 @@ function rootReducer(state = initialState, action) {
         recipes: action.payload,
         allRecipes: action.payload,
       };
+      case ERROR_OCURRED:
+        return {
+            ...state,
+            error: action.payload
+        }
+
+        case CLEAR_ERROR:
+          return {
+              ...state,
+              error: ''
+          }
+
+
     case GET_TYPES_OF_DIET:
       return {
         ...state,
