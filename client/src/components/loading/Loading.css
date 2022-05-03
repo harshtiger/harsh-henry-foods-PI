@@ -1,11 +1,10 @@
 .loading {
-    width: 100%;
-    height: 100%;
-    position:fixed;
-    background-image: url("../../assets/bbck.jpg");
-    background-color: black;
-    image-resolution:unset ;
-    
+  width: 100%;
+  height: 100%;
+  position:fixed;
+  background-image: url("../../assets/bbck.jpg");
+  background-color: black;
+  image-resolution:unset ;
   
   
   }
@@ -18,7 +17,7 @@
    height: fit-content;
    margin-left: auto;
    margin-right: auto;
-    
+   padding-top: 15%;
   
    border-radius: 15px;
   padding-left: 25px;

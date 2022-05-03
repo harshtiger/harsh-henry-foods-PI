@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Paginate from "../Paginate/Paginate";
 import SearchBar from "../SearchBar/SearchBar";
-import Loading from "../loading/Loading"
+import LoadingHome from "../loading/LoadingHome"
 import Modal from "../modal/Modal";
 
 
@@ -29,6 +29,9 @@ export default function Home() {
   const allRecipes = useSelector((state) => state.recipes);
   const diets = useSelector((state) => state.diets);
   const error = useSelector(state => state.error);
+
+
+
   //Paginado:
 
 
@@ -43,23 +46,22 @@ export default function Home() {
 
 
   const paginate = (pageNumber) => {   // esto setea el paginado
-    setCurrentPage(pageNumber);
+  setCurrentPage(pageNumber);
   };
 
 
-  const [/*orderName*/, setOrderName] = useState("");
-  const [/*orderLike*/, setOrderLike] = useState("");
- // const [loading, setLoading] = useState(false);
+ const [/*orderName*/, setOrderName] = useState("");
+ const [/*orderLike*/, setOrderLike] = useState("");
+ const [/*cambio*/, setCambio] = useState(false);
 
 
-  /*const getdata = async () => {
-    await dispatch(getNameRecipe());    //cuando haga una busqueda, me setea el estado del load en true
-    setLoading(true);
-  };*/
+
 
 
   useEffect(() => {
     dispatch(getRecipes());  // trae todas las recetas
+    setCambio(true);
+    
    
     
     
@@ -126,6 +128,8 @@ export default function Home() {
         >
           Show all recipes
           
+
+          
         </button>
       </div>
 
@@ -177,51 +181,50 @@ export default function Home() {
 
 
       <div className="cards">
-        {currentRecipes ? 
+       
+      {allRecipes.length>0? currentRecipes?.map((c) => {
          
-        currentRecipes?.map ((c) => (
+        return  (
           <div key={c.id}>
+             
             <Link to={"/home/" + c.id} className="linkCard">
+             
               <Card
+               
                 title={c.title}
+
+
                 image={
-                  c.image ? (   // ternario, si no recibe imagen de  la api le pasa una imagen default
-                    c.image
-                  ) : (
-                    <img
-                      src="https://shorturl.ae/eEB8K"
-                      alt="Img not provided"
-                    />
-                  )
-                }
+                  c.image 
+                  ?(c.image) 
+                  :(<img src="https://shorturl.ae/eEB8K" alt="Img not provided"/>)                  
+                 }   
+
+
                 diets={
                   c.createdDb
-                    ? c.diets.map((d) => (
-                        <p key={d.name} className="dietsMap">
-                          {d.name}
-                        </p>
-                      ))
-                    : c.diets.map((d) => (
-                        <p key={d} className="dietsMap">
-                          {d}
-                        </p>
-                      ))
-                }
+                    ? c.diets.map((d) => ( <p key={d.name} className="dietsMap">{d.name}</p>))
+                    : c.diets.map((d) => ( <p key={d} className="dietsMap">{d}</p>))
+                     }
+
                 vegetarian={
-                  c.vegetarian === true ? (
-                    <p className="dietsMap">vegetarian</p>
-                  ) : (
-                    <p></p>
-                  )
-                }
+                  c.vegetarian === true 
+                  ? (<p className="dietsMap">vegetarian</p>) 
+                  :(<p></p>)
+                  }
+
+
                 score={c.aggregateLikes}
+
+
               />
               
             </Link>
             
-          </div>
-        ))   : <Loading /> } 
-      </div>
+          </div>)})    : <LoadingHome/>}  
+          
+        </div> 
+      
       
 
 
@@ -235,6 +238,8 @@ export default function Home() {
           paginate={paginate}
         />
       </div>
+
+
     </div>
   );
 }

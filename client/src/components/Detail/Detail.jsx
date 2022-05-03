@@ -16,7 +16,7 @@ export default function Detail(props) {
     dispatch(getDetail(props.match.params.id));
     setCambio(true);
   }, [props.match.params.id, dispatch]);
-  console.log(detail);
+  
 
   return (
     <div className="detail">
