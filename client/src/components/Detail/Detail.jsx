@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail } from "../../actions";
+import { getDetail, clearDetails } from "../../actions";
 import { Link } from "react-router-dom";
 import "./Detail.css";
 import Loading from "../loading/Loading";
@@ -15,6 +15,10 @@ export default function Detail(props) {
   useEffect(() => {
     dispatch(getDetail(props.match.params.id));
     setCambio(true);
+    return () => {
+      dispatch(clearDetails());
+  }
+    
   }, [props.match.params.id, dispatch]);
   
 
