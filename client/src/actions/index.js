@@ -13,6 +13,7 @@ export const GET_NAME_RECIPE = "GET_NAME_RECIPE";
 export const GET_DIETS = "GET_DIETS";
 export const POST_RECIPE = "POST_RECIPE";
 export const GET_DETAIL = "GET_DETAIL";
+export const CLEAR_DETAILS = 'CLEAR_DETAILS';
 
 export const ERROR_OCURRED = 'ERROR_OCURRED';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
@@ -147,4 +148,10 @@ export function getDetail(id) {
       dispatch({type: ERROR_OCURRED, payload: error.toString()})
     }
   };
+}
+
+export function clearDetails () {
+  return {
+      type: CLEAR_DETAILS
+  }
 }

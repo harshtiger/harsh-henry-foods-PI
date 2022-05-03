@@ -9,7 +9,8 @@ import {
   POST_RECIPE,
   GET_DETAIL,
   ERROR_OCURRED,
-  CLEAR_ERROR
+  CLEAR_ERROR,
+  CLEAR_DETAILS,
 
 } from "../actions";
 
@@ -125,6 +126,13 @@ function rootReducer(state = initialState, action) {
         ...state,
         detail: action.payload,
       };
+
+      case CLEAR_DETAILS:
+        return {
+            ...state,
+            detail: []
+        }
+
 
     default:
       return state;
