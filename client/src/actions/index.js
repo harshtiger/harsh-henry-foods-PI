@@ -13,7 +13,9 @@ export const GET_NAME_RECIPE = "GET_NAME_RECIPE";
 export const GET_DIETS = "GET_DIETS";
 export const POST_RECIPE = "POST_RECIPE";
 export const GET_DETAIL = "GET_DETAIL";
-export const MODAL = "MODAL"
+
+export const ERROR_OCURRED = 'ERROR_OCURRED';
+export const CLEAR_ERROR = 'CLEAR_ERROR';
 
 
 
@@ -22,27 +24,48 @@ export const MODAL = "MODAL"
 
 export function getRecipes() {
   return async function (dispatch) {
-    var json = await axios.get("http://localhost:3001/recipes");
-    return dispatch({
-      type: "GET_RECIPES",
-      payload: json.data,
-    });
+
+    //var json = await axios.get("http://localhost:3001/recipes");
+    return fetch("http://localhost:3001/recipes")
+    .then (response => {
+      if (!response.ok) throw Error (response.status)
+      return response.json()
+    })
+    .then(json => {
+      dispatch({type: GET_RECIPES, payload: json})
+    })
+    .catch(error => dispatch({type: ERROR_OCURRED, payload: error.toString()}))
   };
 }
+
+
 
 export function getTypesOfDiet() {
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/types");
+      var json = await fetch("http://localhost:3001/types")
+
+      .then(response => {
+        if(!response.ok) throw Error(response.status);
+        return response.json()
+      })
       return dispatch({
         type: "GET_TYPES_OF_DIET",
-        payload: json.data,
+        payload: json
       });
     } catch (error) {
-      alert("error")
+      dispatch({type: ERROR_OCURRED, payload: error.toString()})
     }
   };
 }
+
+export function clearError()  {
+  return {
+      type: CLEAR_ERROR
+  }
+}
+
+
 
 export function filterByDiet(payload) {
   return {
@@ -78,28 +101,36 @@ export function getNameRecipe(name) {
       });
 
     } catch (error) {
-       alert("Recipe not found x.x")
+      dispatch({type: ERROR_OCURRED, payload: error.toString()})
     }
   };
 }
 
 export function getDiets() {
   return async function (dispatch) {
+    try{
     var json = await axios.get("http://localhost:3001/types");
     return dispatch({
       type: "GET_DIETS",
       payload: json.data,
     });
+  } catch(error){
+    dispatch({type: ERROR_OCURRED, payload: error.toString()})
+
+  }
   };
 }
 
 export function postRecipe(payload) {
   return async function () {
-    const json = await axios.post("http://localhost:3001/recipe", payload);
+   try { const json = await axios.post("http://localhost:3001/recipe", payload);
     return {
       type: "POST_RECIPE",
       json,
     };
+  } catch (error){
+    payload({type: ERROR_OCURRED, payload: error.toString()})
+  }
   };
 }
 
@@ -113,7 +144,7 @@ export function getDetail(id) {
         payload: json.data,
       });
     } catch (error) {
-      alert("Id recipe not found");
+      dispatch({type: ERROR_OCURRED, payload: error.toString()})
     }
   };
 }

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDetail } from "../../actions";
 import { Link } from "react-router-dom";
 import "./Detail.css";
+import Loading from "../loading/Loading";
 
 export default function Detail(props) {
   console.log(props);
@@ -90,7 +91,7 @@ export default function Detail(props) {
           </div>
         </div>
       ) : (
-        <p>Loading...</p>
+        <Loading />
       )}
     </div>
   );
