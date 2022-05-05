@@ -21,7 +21,7 @@ export default function Card({ title, image, diets, vegetarian, score }) {
       </h5>
       <h5 className="typeOfD">Score:</h5>
       <h5 className="diets">
-        <i class="material-icons">favorite</i>
+        
         {score}
       </h5>
     </div>
