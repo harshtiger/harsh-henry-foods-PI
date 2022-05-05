@@ -12,6 +12,8 @@ import {
   CLEAR_ERROR,
   CLEAR_DETAILS,
 
+  PAG_INDEXES
+
 } from "../actions";
 
 const initialState = {
@@ -20,6 +22,8 @@ const initialState = {
   diets: [],
   detail: [],
   error:"",
+  indexOfFirstRecipe: 0,
+  indexOfLastRecipe: 9,
 };
 
 
@@ -49,6 +53,16 @@ function rootReducer(state = initialState, action) {
         ...state,
         diets: action.payload,
       };
+
+
+      case PAG_INDEXES: 
+        return {
+          ...state,
+          indexOfFirstRecipe: action.payload.indexOfFirstRecipe,
+          indexOfLastRecipe: action.payload.indexOfLastRecipe,
+        };
+
+      
     case FILTER_BY_DIET:
       let allRecipes = state.allRecipes;
       const recipesApi = allRecipes.filter((r) => !r.createdDb);

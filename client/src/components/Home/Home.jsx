@@ -34,20 +34,87 @@ export default function Home() {
 
   //Paginado:
 
-
+ 
   const [currentPage, setCurrentPage] = useState(1);        // aca seteo la pagina inicial en 1
-  const [recipesPerPage, /*setRecipesPerPage*/] = useState(9);  // le pido paginar 9  cards en cada page
+  const [recipesPerPage, setRecipesPerPage] = useState(9);// le pido paginar 9  cards en cada page
   const indexOfLastRecipe = currentPage * recipesPerPage;   
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
   const currentRecipes = allRecipes.slice(
     indexOfFirstRecipe,
     indexOfLastRecipe
   );
+//
+
+useEffect(() => {
+  setCurrentPage(1);
+  setMaxPageDisplay(5);
+  setMinPageDisplay(1);
+}, [allRecipes]);
 
 
-  const paginate = (pageNumber) => {   // esto setea el paginado
-  setCurrentPage(pageNumber);
+
+const pagesDisplayLimit = 5;
+const [maxPageDisplay, setMaxPageDisplay] = useState(5); 
+const [minPageDisplay, setMinPageDisplay] = useState(1);
+
+const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(allRecipes / recipesPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
+
+  
+  const handleNext = () => {
+    if (currentPage !== pageNumbers.length) {
+      setCurrentPage(currentPage + 1);
+      if (currentPage + 1 > maxPageDisplay) {
+        setMaxPageDisplay(maxPageDisplay + pagesDisplayLimit);
+        setMinPageDisplay(minPageDisplay + pagesDisplayLimit);
+      }
+    }
   };
+
+  const handleSupNext = () => {
+    const lastPage = pageNumbers.length;
+    if (currentPage !== lastPage) {
+      setCurrentPage(lastPage);
+      setMaxPageDisplay(lastPage);
+      setMinPageDisplay(lastPage - pagesDisplayLimit + 1);
+    }
+  };
+
+  const handleSupPrev = () => {
+    
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+      setMaxPageDisplay(5);
+      setMinPageDisplay(1);
+      
+    }
+  };
+
+  const handlePrev = () => {
+    console.log("owo")
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+      if (currentPage - 1 < minPageDisplay) {
+        setMaxPageDisplay(
+          maxPageDisplay - pagesDisplayLimit < 5 ? 5 : maxPageDisplay - pagesDisplayLimit
+        );
+        setMinPageDisplay(
+          minPageDisplay - pagesDisplayLimit <= 0 ? 1 : minPageDisplay - pagesDisplayLimit
+        );
+      }
+    }
+  };
+  
+
+  
+  const paginate = (pageNumber) => {   // esto setea el paginado
+    setCurrentPage(pageNumber);
+    };
+
+
 
 
  const [/*orderName*/, setOrderName] = useState("");
@@ -107,6 +174,9 @@ export default function Home() {
     setCurrentPage(1);
     setOrderLike("Order" + e.target.value);
   }
+
+  //
+
 
   
 
@@ -169,10 +239,16 @@ export default function Home() {
 
       <div className="paginate">
         <Paginate
-          recipesPerPage={recipesPerPage}
-          allRecipes={allRecipes.length}
-          paginate={paginate}
-        />
+        paginate={paginate}
+        handleNext={handleNext}
+        handleSupNext={handleSupNext}
+        handlePrev={handlePrev}
+        handleSupPrev={handleSupPrev}
+        maxPageDisplay = {maxPageDisplay}
+        minPageDisplay = {minPageDisplay}
+
+        
+        /> 
       </div>
       
 
@@ -232,11 +308,17 @@ export default function Home() {
 
 
       <div className="paginate">
-        <Paginate
-          recipesPerPage={recipesPerPage}
-          allRecipes={allRecipes.length}
-          paginate={paginate}
-        />
+      <Paginate
+        paginate={paginate}
+        handleNext={handleNext}
+        handleSupNext={handleSupNext}
+        handlePrev={handlePrev}
+        handleSupPrev={handleSupPrev}
+        maxPageDisplay = {maxPageDisplay}
+        minPageDisplay = {minPageDisplay}
+
+        
+        />  
       </div>
 
 

@@ -6,6 +6,7 @@ import "./RecipeCreate.css";
 
 function validate(input) {
   let errors = {};
+  
   input.title
     ? (errors.title = "")
     : (errors.title = "You must name the recipe");

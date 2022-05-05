@@ -1,8 +1,6 @@
-import React from "react";
-import { useState } from "react";
+import { React, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getNameRecipe } from "../../actions";
-
 
 
 import "./SearchBar.css";
@@ -23,8 +21,8 @@ export default function SearchBar() {
     } else {
      
     dispatch(getNameRecipe(name));   
-    setName("");
-    document.querySelector("#inputsearch").value = "";
+    setName(e.target.value);
+    
 
      
     }
@@ -34,6 +32,7 @@ export default function SearchBar() {
   function handleInputChange(e){
     e.preventDefault();
     setName(e.target.value);
+   
     
     
   }
@@ -41,25 +40,23 @@ export default function SearchBar() {
 
 
   return (
-   <div className="searchBar">
+
+   <><div className="searchBar">
       <input
         id="inputsearch"
         className="input"
-        type="text"
+        type="search"
         value={name}
         placeholder="Search recipe..."
         onChange={(e) => handleInputChange(e)}
-        autoComplete='false'
+        autoComplete='false' />
 
-        
-      />
-      
       <button type="submit" onClick={(e) => handleSubmit(e)} className="btn">
-        <span class="material-icons">search</span>
-       
+        <span className="search">search</span>
+
       </button>
-      
-    </div>
+
+    </div></>
 
     
     

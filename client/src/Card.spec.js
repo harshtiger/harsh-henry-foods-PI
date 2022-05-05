@@ -1,18 +1,18 @@
-import React from "react";
+import React, { isValidElement } from "react";
 import { configure, shallow } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import Card from "../components/Card.jsx";
+import { EnzymeAdapter } from "enzyme";
+import Card from "../src/components/Card/Card";
 
-configure({ adapter: new Adapter() });
+configure({ adapter: new EnzymeAdapter() });
 
 describe("<Card />", () => {
   describe("Estructura", () => {
     let wrapper;
     beforeEach(() => {
-      wrapper = shallow(<Card />);
+      wrapper = isValidElement(<Card />);
     });
-    it("Renderiza 1 <div> con toda la ifo que le llega por porps adentro", () => {
-      expect(wrapper.find("div")).toHaveLength(1);
+    it("Renderiza 1 <div> con toda la ifo que le llega por props adentro", () => {
+      expect(wrapper("div")).toHaveLength(1);
     });
 
     it("Renderiza 1 <img>", () => {

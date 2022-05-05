@@ -18,6 +18,8 @@ export const CLEAR_DETAILS = 'CLEAR_DETAILS';
 export const ERROR_OCURRED = 'ERROR_OCURRED';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 
+export const PAG_INDEXES = 'PAG_INDEXES';
+
 
 
 
@@ -35,7 +37,7 @@ export function getRecipes() {
     .then(json => {
       dispatch({type: GET_RECIPES, payload: json})
     })
-    .catch(error => dispatch({type: ERROR_OCURRED, payload: error.toString()}))
+    .catch(error => dispatch({type: ERROR_OCURRED, payload: error.toString()}, console.log("Error, could not get recipes, due to a connection problem")))
   };
 }
 
@@ -66,6 +68,9 @@ export function clearError()  {
   }
 }
 
+export const setPagIndexes = (indexOfLastRecipe, indexOfFirstRecipe) => {
+  return { type: PAG_INDEXES, payload: { indexOfLastRecipe, indexOfFirstRecipe } };
+};
 
 
 export function filterByDiet(payload) {
