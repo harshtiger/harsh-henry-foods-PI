@@ -154,11 +154,14 @@ setCurrentPage(pageNumber);}
       <SearchBar />
       {error && <Modal show={true} setShow={clearErrors} message={"No results were found"} />}
       
-      <Link to="/recipe" className="linkCreate">
-        <button className="btnCreate">Create your own recipe</button>
-      </Link>
+      
 
       <div className="showAll">
+
+      <Link to="/recipe" className="showAll">
+        <button >Create your own recipe</button>
+      </Link>
+
         <button
           onClick={(e) => {handleClick(e);}}>
           Show all recipes                
