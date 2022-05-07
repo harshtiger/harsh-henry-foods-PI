@@ -1,4 +1,5 @@
-const { Router } = require('express')
+const { Router } = require('express');
+const deleteFromDb = require('../controllers/deleteFromDb');
 const { Recipe, Diet } = require("../db");
 const router = Router();
 
@@ -29,5 +30,16 @@ router.post("/", async (req, res) => {
     recipeCreated.addDiet(dietDb);
     res.send("Recipe created successfully");
   });
+
+  router.delete("/", async (req, res) => {
+    let { id } = req.query;
+    try {
+      let response = await deleteFromDb(id);
+      res.status(200).send(response);
+    } catch (error) {
+      res.status(409).send(error.message);
+    }
+  });
+  
 
   module.exports = router;
