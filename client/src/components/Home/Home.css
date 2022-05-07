@@ -133,21 +133,10 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.paginate {
-  margin-bottom: 0px;
-  padding-bottom: 0%;
 
-}
 
-.paginate button {
-  background-color: rgb(88, 88, 88);
-  border-color: rgb(255, 255, 255);
- 
-}
-.paginate button:hover {
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
-}
+
+
 
 .cards {
   margin-left: 7%;

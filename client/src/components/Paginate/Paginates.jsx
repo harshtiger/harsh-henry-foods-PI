@@ -3,7 +3,10 @@ import React from "react";
 import "./Paginate.css";
 
 
-export default function Paginates({currentPage,  recipesPerPage, allRecipes, paginate, handleNext, handleSupNext,handleSupPrev, handlePrev, maxPageDisplay, minPageDisplay}) {
+export default function Paginates({currentPage, 
+   recipesPerPage, allRecipes, paginate, handleNext,
+    handleSupNext,handleSupPrev, handlePrev, maxPageDisplay,
+     minPageDisplay}) {
   
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(allRecipes / recipesPerPage); i++) {
@@ -17,8 +20,8 @@ export default function Paginates({currentPage,  recipesPerPage, allRecipes, pag
         <p></p>
       ) : (
         <nav className="btnPag">
-          <button onClick={handleSupPrev}>First Page</button>
-          <button onClick={handlePrev}>{"<"}</button>
+          <button className="pgB" onClick={handleSupPrev}>First Page</button>
+          <button className="pgB" onClick={handlePrev}>{"<"}</button>
           {pageNumbers?.map(number => {
             if (number <= maxPageDisplay && number >= minPageDisplay) {
               return (
@@ -35,9 +38,9 @@ export default function Paginates({currentPage,  recipesPerPage, allRecipes, pag
               return null;
             }
           })}
-          <button disabled={currentPage === Math.ceil(allRecipes / recipesPerPage)}
+          <button className="pgB" disabled={currentPage === Math.ceil(allRecipes / recipesPerPage)}
           onClick={handleNext}>{">"}</button>
-          <button disabled={currentPage === Math.ceil(allRecipes / recipesPerPage)}
+          <button className="pgB" disabled={currentPage === Math.ceil(allRecipes / recipesPerPage)}
            onClick={handleSupNext}>Last Page</button>
         </nav>
       )}

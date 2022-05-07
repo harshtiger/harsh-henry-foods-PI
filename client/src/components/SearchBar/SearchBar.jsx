@@ -30,15 +30,19 @@ export default function SearchBar() {
   }
   
 
-  const onKeyPress = event => {
-    if (!name) {
-      return alert("It's required to enter a name in order to make a search")
-    } else {
+  const onKeyPress = event => {         //si me  dan enter en el input hago la busqueda jajaj
+   
     if (event.charCode === 13) {
+      
+      if (!name) {
+        return alert("It's required to enter a name in order to make a search")
+      } else {
       dispatch(getNameRecipe(name, dispatch));
       setName("");
+      
     }
   }
+  
   };
 
   function handleInputChange(e){
@@ -60,9 +64,9 @@ export default function SearchBar() {
         className="input"
         type="search"
         value={name}
-        placeholder="Search recipe..."
+        placeholder="Search a recipe..."
         onChange={(e) => handleInputChange(e)}
-        autoComplete='false' 
+        autoComplete="off" 
         onKeyPress={(e) =>onKeyPress(e)}
         />
 

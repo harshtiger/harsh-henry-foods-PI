@@ -26,7 +26,7 @@ export default function Home() {
   //Paginado:
  
   const [currentPage, setCurrentPage] = useState(1);        // aca seteo la pagina inicial en 1
-  const [recipesPerPage, /*setRecipesPerPage*/] = useState(9);// le pido paginar 9  cards en cada page
+  const [recipesPerPage, /*setRecipesPerPage*/] = useState(1);// le pido paginar 9  cards en cada page
   const indexOfLastRecipe = currentPage * recipesPerPage;   
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
   const currentRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
