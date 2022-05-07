@@ -3,9 +3,10 @@ import styled from "styled-components";
 
 const Content = styled.div`
     position: relative;
-    background-color: #FF9911;
-    border: 5px solid #FFFFFF;
+    background-color: #000000;
+    border: 5px solid #FF9911;
     margin: auto;
+    color: #FF9911;
 
     width: 30%;
     font-size: 35px;
@@ -23,13 +24,13 @@ const Span = styled.span`
     align-items: center;
     width: 30px;
     height: 30px;
-    color: #414141;
+    color: #FF9911;
     border-radius: 99px;
     float: right;
     font-size: 20px;
     font-weight: bold;
     &:hover{ 
-    color: #fff;
+    color: #FF9911;
     background-color: #414141;
     
     text-decoration: none;

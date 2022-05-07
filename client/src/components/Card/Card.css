@@ -2,14 +2,15 @@
   border: 4px solid rgb(0, 0, 0);
   
 
-  background:rgba(255, 153, 0, 0.821);
+  background:rgba(255, 153, 0, 0.926);
   box-shadow: 2px 2px 2px rgb(255, 255, 255);
-  
+  font-size: 20px;
   color: rgb(0, 0, 0);
   display: inline-block;
-  margin: 2%;
+  margin: 5%;
+  margin-right:25px ;
   padding: 1em;
-  height: 450px;
+  height: 480px;
   vertical-align: top;
   width: 33, 5%;
   border-radius: 20px;
@@ -27,7 +28,7 @@
 }
 
 .cardComp h3:hover {
-  text-decoration: underline rgb(255, 255, 255);
+  
   color: rgb(255, 255, 255);
   text-shadow: rgb(0, 0, 0) -0.5px 0.5px;
 }
