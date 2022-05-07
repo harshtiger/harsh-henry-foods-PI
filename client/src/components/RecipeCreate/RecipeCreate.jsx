@@ -59,16 +59,19 @@ export default function RecipeCreate() {
   }
 
   function handleSelectDiet(e) {
-    setInput((input) => ({
-      ...input,
-      diets: [...input.diets, e.target.value],
-    }));
+   
     setErrors(
       validate({
         ...input,
         diets: [...input.diets, e.target.value],
       })
     );
+    if(!input.diets.includes(e.target.value)){
+    setInput((input) => ({
+      ...input,
+      diets: [...input.diets, e.target.value],
+    }));
+  }
   }
 
 

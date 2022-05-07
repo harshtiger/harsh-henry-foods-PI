@@ -24,6 +24,7 @@ const initialState = {
   error:"",
   indexOfFirstRecipe: 0,
   indexOfLastRecipe: 9,
+  
 };
 
 

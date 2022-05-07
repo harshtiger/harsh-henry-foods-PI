@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getNameRecipe } from "../../actions";
-
+//import Paginates from "../Paginate/Paginates"
 
 import "./SearchBar.css";
 
@@ -22,6 +22,7 @@ export default function SearchBar() {
      
     dispatch(getNameRecipe(name));   
     setName(e.target.value);
+    setName("")
     
 
      
@@ -29,9 +30,25 @@ export default function SearchBar() {
   }
   
 
+  const onKeyPress = event => {         //si me  dan enter en el input hago la busqueda jajaj
+   
+    if (event.charCode === 13) {
+      
+      if (!name) {
+        return alert("It's required to enter a name in order to make a search")
+      } else {
+      dispatch(getNameRecipe(name, dispatch));
+      setName("");
+      
+    }
+  }
+  
+  };
+
   function handleInputChange(e){
     e.preventDefault();
     setName(e.target.value);
+
    
     
     
@@ -47,9 +64,11 @@ export default function SearchBar() {
         className="input"
         type="search"
         value={name}
-        placeholder="Search recipe..."
+        placeholder="Search a recipe..."
         onChange={(e) => handleInputChange(e)}
-        autoComplete='false' />
+        autoComplete="off" 
+        onKeyPress={(e) =>onKeyPress(e)}
+        />
 
       <button type="submit" onClick={(e) => handleSubmit(e)} className="btn">
         <span className="search">search</span>

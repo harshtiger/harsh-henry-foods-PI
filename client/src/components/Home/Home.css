@@ -1,7 +1,11 @@
+*{
+  text-decoration: none;
+}
+
 .home {
  
   width: 100%;
-  height: 2200px;
+  height: auto;
   position:initial;
   background-color: black;
   background-image: url("../../assets/bbck.jpg");
@@ -49,14 +53,7 @@
   padding-right: 25px;
 }
 
-.linkCreate {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-right: 7vw;
-  color: rgb(0, 0, 0);
-}
+
 .btnCreate {
   border: solid 2px transparent;
   border-color: rgb(0, 0, 0);
@@ -73,14 +70,13 @@
   cursor: pointer;
   color: rgb(0, 0, 0);
   font-size: 17px;
+ 
 }
 .btnCreate:hover {
   background-color:rgb(255,153,0);
   color: rgb(255, 255, 255);
 }
-.linkCreate {
-  text-decoration: none;
-}
+
 
 .showAll {
   display: flex;
@@ -99,7 +95,7 @@
   border-radius: 100px;
   display: flex;
   justify-content: center;
- 
+ text-decoration: none;
   align-items: center;
   width: 230px;
  margin-left: auto;
@@ -133,21 +129,10 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.paginate {
-  margin-bottom: 0px;
-  padding-bottom: 0%;
 
-}
 
-.paginate button {
-  background-color: rgb(88, 88, 88);
-  border-color: rgb(255, 255, 255);
- 
-}
-.paginate button:hover {
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
-}
+
+
 
 .cards {
   margin-left: 7%;
