@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const deleteFromDb = require('../controllers/deleteFromDb');
+const putRecipe = require('../controllers/updateRecipe')
 const { Recipe, Diet } = require("../db");
 const router = Router();
 
@@ -40,6 +41,8 @@ router.post("/", async (req, res) => {
       res.status(409).send(error.message);
     }
   });
+
+  router.put("/:id", putRecipe);
   
 
   module.exports = router;

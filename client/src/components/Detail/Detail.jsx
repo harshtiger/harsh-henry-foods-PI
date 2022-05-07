@@ -1,16 +1,32 @@
 import React from "react";
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail, clearDetails } from "../../actions";
-import { Link } from "react-router-dom";
+import { getDetail, clearDetails, deleteRecipe } from "../../actions";
+import {  useParams  } from "react-router";
+import { Link, useHistory  } from "react-router-dom";
 import "./Detail.css";
 import Loading from "../loading/Loading";
+import DeleteConfirm from "../modal/DeleteConfirm"
+
+
+
+
+
+
 
 export default function Detail(props) {
   console.log(props);
   const dispatch = useDispatch();
   const [/*cambio*/, setCambio] = useState(false);
   const detail = useSelector((state) => state.detail);
+  const [popUp, setPopUp] = useState(false);
+  
+  
+  const { id } = useParams();
+
+  //const navigate = useNavigate();
+  const history = useHistory()
 
   useEffect(() => {
     dispatch(getDetail(props.match.params.id));
@@ -20,7 +36,31 @@ export default function Detail(props) {
   }
     
   }, [props.match.params.id, dispatch]);
+
+ 
+
+  //delete
   
+  function handleDeleteClick() {
+    setPopUp(() => true);
+  }
+  
+  function acceptPopUp() {
+    console.log("owo")
+    dispatch(deleteRecipe(id));
+    setPopUp(false);
+    history.push("/home")
+  }
+  
+  
+
+  //cancel? ok
+  function cancelPopUp() {
+    dispatch(deleteRecipe(id));
+    setPopUp(false);
+  }
+
+
 
   return (
     <div className="detail">
@@ -30,6 +70,7 @@ export default function Detail(props) {
       {detail.length ? 
       (<div>
           <h1> "{detail[0].title}"</h1>
+          
           <img src={detail[0].image 
           ?(detail[0].image) 
           :(<img src="https://shorturl.ae/eEB8K" alt="img plate"/>)} alt="img recipe"/>
@@ -50,7 +91,28 @@ export default function Detail(props) {
                 : "Dish types: " + detail[0].dishTypes.join(", ")}
             </h2>
 
+           
           </div>
+
+          <div className="detail"> <button onClick={handleDeleteClick}>Delete recipe
+                    
+                    </button>
+  </div>
+
+          
+
+{popUp &&  
+        <DeleteConfirm
+        
+          show={true} setShow={setPopUp}
+          text="Are you sure you want to delete this recipe??"
+          
+          acceptPopUp={acceptPopUp}
+          cancelPopUp={cancelPopUp}
+
+          
+        /> }
+
 
 
           <div className="details">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { postRecipe, getDiets } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import "./RecipeCreate.css";
@@ -26,7 +26,7 @@ function validate(input) {
 
 export default function RecipeCreate() {
   const dispatch = useDispatch();
-  const history = useHistory();
+  
   const diets = useSelector((state) => state.diets);
   const [errors, setErrors] = useState({});
   
@@ -89,7 +89,7 @@ export default function RecipeCreate() {
         image: "",
         diets: [],
       });
-      history.push("/home");
+      
     } else {
       e.preventDefault();
       alert("You must complete every field!!");
