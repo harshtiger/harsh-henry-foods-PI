@@ -12,7 +12,8 @@ import {
   CLEAR_ERROR,
   CLEAR_DETAILS,
 
-  PAG_INDEXES
+  PAG_INDEXES,
+  DELETE_RECIPE, 
 
 } from "../actions";
 
@@ -62,6 +63,14 @@ function rootReducer(state = initialState, action) {
           indexOfFirstRecipe: action.payload.indexOfFirstRecipe,
           indexOfLastRecipe: action.payload.indexOfLastRecipe,
         };
+
+        case DELETE_RECIPE: {
+        
+            return {
+              ...state,
+            };
+          
+        }
 
       
     case FILTER_BY_DIET:

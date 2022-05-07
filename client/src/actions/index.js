@@ -20,6 +20,8 @@ export const CLEAR_ERROR = 'CLEAR_ERROR';
 
 export const PAG_INDEXES = 'PAG_INDEXES';
 
+export const DELETE_RECIPE = "DELETE_RECIPE";
+
 
 
 
@@ -160,3 +162,12 @@ export function clearDetails () {
       type: CLEAR_DETAILS
   }
 }
+
+export const deleteRecipe = (id) => {
+  return async function (dispatch) {
+    await axios.delete(`http://localhost:3001/recipe?id=${id}`);
+    return dispatch({
+      type: "DELETE_RECIPE",
+    });
+  };
+};
