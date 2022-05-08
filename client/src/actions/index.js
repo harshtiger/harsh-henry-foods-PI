@@ -22,6 +22,8 @@ export const PAG_INDEXES = 'PAG_INDEXES';
 
 export const DELETE_RECIPE = "DELETE_RECIPE";
 
+export const UPDATE_RECIPE = "UPDATE_RECIPE"
+
 
 
 
@@ -146,7 +148,7 @@ export function getDetail(id) {
   return async function (dispatch) {
     try {
       
-      var json = await axios.get("http://localhost:3001/recipes/" + id);
+      let json = await axios.get("http://localhost:3001/recipes/" + id);
       return dispatch({
         type: "GET_DETAIL",
         payload: json.data,
@@ -168,6 +170,15 @@ export const deleteRecipe = (id) => {
     await axios.delete(`http://localhost:3001/recipe?id=${id}`);
     return dispatch({
       type: "DELETE_RECIPE",
+    });
+  };
+};
+
+export const updateRecipe = (id, data) => {
+  return async function (dispatch) {
+    await axios.put(`http://localhost:3001/recipe/${id}`, data);
+    return dispatch({
+      type: "UPDATE_RECIPE",
     });
   };
 };

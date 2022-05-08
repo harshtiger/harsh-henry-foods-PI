@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { postRecipe, getDiets } from "../../actions";
-import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory, useParams } from "react-router-dom";
+import { postRecipe, getDiets, getDetail, updateRecipe, getRecipes } from "../../actions";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import "./RecipeCreate.css";
 
 function validate(input) {
@@ -25,16 +25,29 @@ function validate(input) {
 }
 
 export default function RecipeCreate() {
+  const recipeUpdate = useSelector( state => state.detail)
+
   const dispatch = useDispatch();
-  
+  const history = useHistory();
   const diets = useSelector((state) => state.diets);
   const [errors, setErrors] = useState({});
+  const [updated, setUpdated] = useState(false);
+
+  // put
+
+  const {id} = useParams();
+ 
+  
+   
+  
   
 
-  useEffect(() => {
+  useEffect(() => {// esto trae las diets
     dispatch(getDiets());
-  }, [dispatch]);
-
+    
+    id && dispatch(getDetail(id));
+  }, [dispatch, id]);
+  
   const [input, setInput] = useState({
     title: "",
     summary: "",
@@ -45,7 +58,96 @@ export default function RecipeCreate() {
     diets: [],
   });
 
+  // handlers
+
+  function handleSelectDiet(e) {
+   
+    setErrors(
+      validate({
+        ...input,
+        diets: [...input.diets, e.target.value],
+      })
+    ); 
+    if(!diets.includes(e.target.value)){
+    setInput((input) => ({
+      ...input,
+      diets: [...input.diets, e.target.value],
+    }));
+  }
+  }
+
+  
+  function handleDelete(e, d) {
+    e.preventDefault();
+    setInput({
+      ...input,
+      diets: input.diets.filter((diet) => diet !== d),
+    });
+  }
+
+
+
+  function handleSubmit(e) {
+    console.log(id)
+
+    if (!input.title && !input.summary && !input.image && input.diets.length === 0)  {
+      e.preventDefault();
+      alert("You must complete every field!!");
+    }
+    
+    if (input.title && input.summary && input.image && input.diets.length > 0) {
+      e.preventDefault();
+      
+      if( id === undefined){
+        console.log("owo")
+
+      
+        
+      dispatch(postRecipe(input));
+      alert("Recipe succesfully Created!!");
+      setInput({
+        title: "",
+        summary: "",
+        aggregateLikes: 0,
+        healthScore: 0,
+        analyzedInstructions: "",
+        image: "",
+        diets: [],
+      });
+
+     history.push("/home");
+     
+     
+    
+  } else if (id) {
+   
+    dispatch(updateRecipe(id, input));
+    alert("updated!");
+    history.push("/home");
+   
+  } 
+}
+  
+  }
+  if (recipeUpdate.length > 0) {
+  if (id && recipeUpdate[0].title && !updated) {
+    setInput({
+      ...input,
+      title: recipeUpdate[0].title,
+      summary: recipeUpdate[0].summary,
+      aggregateLikes: recipeUpdate[0].aggregateLikes,
+      healthScore: recipeUpdate[0].healthScore,
+      analyzedInstructions: recipeUpdate[0].analyzedInstructions,
+      image: recipeUpdate[0].image,
+      //diets: updateRecipe[0].diets,
+    });
+    setUpdated(!updated);
+  }
+  }
+
+
   function handleChange(e) {
+    e.preventDefault();
     setInput((input) => ({
       ...input,
       [e.target.name]: e.target.value,
@@ -58,51 +160,8 @@ export default function RecipeCreate() {
     );
   }
 
-  function handleSelectDiet(e) {
-   
-    setErrors(
-      validate({
-        ...input,
-        diets: [...input.diets, e.target.value],
-      })
-    );
-    if(!input.diets.includes(e.target.value)){
-    setInput((input) => ({
-      ...input,
-      diets: [...input.diets, e.target.value],
-    }));
-  }
-  }
 
 
-  function handleSubmit(e) {
-    if (input.title && input.summary && input.image && input.diets.length > 0) {
-      e.preventDefault();
-      dispatch(postRecipe(input));
-      alert("Recipe succesfully Created!!");
-      setInput({
-        title: "",
-        summary: "",
-        aggregateLikes: 0,
-        healthScore: 0,
-        analyzedInstructions: "",
-        image: "",
-        diets: [],
-      });
-      
-    } else {
-      e.preventDefault();
-      alert("You must complete every field!!");
-    }
-  }
-
-  function handleDelete(e, d) {
-    e.preventDefault();
-    setInput({
-      ...input,
-      diets: input.diets.filter((diet) => diet !== d),
-    });
-  }
 
   return (
     <div className="create">
@@ -209,3 +268,4 @@ export default function RecipeCreate() {
     </div>
   );
 }
+
