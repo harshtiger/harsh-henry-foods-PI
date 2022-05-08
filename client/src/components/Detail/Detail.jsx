@@ -73,10 +73,17 @@ export default function Detail(props) {
         <button>Back to Home</button>
       </Link>
                
-            
-              <button onClick={handleUpdata} >
+            ({id.length > 8
+              ?<button onClick={handleUpdata} >
                 Update recipe!
               </button>
+              :<br></br>})
+
+({id.length > 8
+              ?<button onClick={handleDeleteClick} >
+               Delete Recipe
+              </button>
+              :<br></br>})
 
 
       {detail.length ? 
@@ -106,10 +113,6 @@ export default function Detail(props) {
            
           </div>
 
-          <div className="detail"> <button onClick={handleDeleteClick}>Delete recipe
-                    
-                    </button>
-  </div>
 
           
 
