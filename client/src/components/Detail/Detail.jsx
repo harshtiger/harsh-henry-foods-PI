@@ -2,7 +2,7 @@ import React from "react";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail, clearDetails, deleteRecipe } from "../../actions";
+import { getDetail, clearDetails, deleteRecipe, updateRecipe } from "../../actions";
 import {  useParams  } from "react-router";
 import { Link, useHistory  } from "react-router-dom";
 import "./Detail.css";
@@ -56,9 +56,14 @@ export default function Detail(props) {
 
   //cancel? ok
   function cancelPopUp() {
-    dispatch(deleteRecipe(id));
+    //dispatch(deleteRecipe(id));
     setPopUp(false);
   }
+
+  const handleUpdata = () => {
+    dispatch(updateRecipe(id));
+    history.push(`/update/${id}`);
+  };
 
 
 
@@ -67,6 +72,13 @@ export default function Detail(props) {
       <Link to="/home">
         <button>Back to Home</button>
       </Link>
+               
+            
+              <button onClick={handleUpdata} >
+                Update recipe!
+              </button>
+
+
       {detail.length ? 
       (<div>
           <h1> "{detail[0].title}"</h1>

@@ -14,11 +14,13 @@ import {
 
   PAG_INDEXES,
   DELETE_RECIPE, 
+  UPDATE_RECIPE
 
 } from "../actions";
 
 const initialState = {
   recipes: [],
+  copyRecipes: [],
   allRecipes: [],
   diets: [],
   detail: [],
@@ -36,6 +38,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         recipes: action.payload,
         allRecipes: action.payload,
+      
       };
       case ERROR_OCURRED:
         return {
@@ -155,12 +158,20 @@ function rootReducer(state = initialState, action) {
         return {
             ...state,
             detail: []
-        }
+        };
+
+
+        case UPDATE_RECIPE:
+      return {
+        ...state,
+      };
 
 
     default:
       return state;
   }
 }
+
+
 
 export default rootReducer;
