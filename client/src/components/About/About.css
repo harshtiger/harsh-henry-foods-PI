@@ -29,6 +29,12 @@
     
     
 }
+.container a{
+    color: white;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: underline;
+}
 
 .container main button {
     border: solid 2px transparent;

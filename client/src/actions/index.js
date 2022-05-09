@@ -167,18 +167,27 @@ export function clearDetails () {
 
 export const deleteRecipe = (id) => {
   return async function (dispatch) {
+    try{
     await axios.delete(`http://localhost:3001/recipe?id=${id}`);
     return dispatch({
       type: "DELETE_RECIPE",
     });
-  };
+  
+  } catch(error){
+    dispatch({type: ERROR_OCURRED, payload: error.toString()})
+  }
+}
 };
 
 export const updateRecipe = (id, data) => {
   return async function (dispatch) {
+    try{
     await axios.put(`http://localhost:3001/recipe/${id}`, data);
     return dispatch({
       type: "UPDATE_RECIPE",
     });
+  } catch(error){
+    dispatch({type: ERROR_OCURRED, payload: error.toString()})
+  }
   };
 };

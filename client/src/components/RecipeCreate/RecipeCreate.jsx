@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { postRecipe, getDiets, getDetail, updateRecipe } from "../../actions";
+import { postRecipe, getDiets, getDetail, updateRecipe, clearError } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
+import Modal from "../modal/Modal";
 import "./RecipeCreate.css";
 
 function validate(input) {
@@ -32,13 +33,19 @@ export default function RecipeCreate() {
   const diets = useSelector((state) => state.diets);
   const [errors, setErrors] = useState({});
   const [updated, setUpdated] = useState(false);
+  const error = useSelector(state => state.error);
 
   // put
 
   const {id} = useParams();
  
+
+  const clearErrors = () => {  // manejo de errores para la ventana modal
+    dispatch(clearError());
+    history.push("/home")
+}
   
-   
+  
   
   
 
@@ -54,10 +61,10 @@ export default function RecipeCreate() {
     aggregateLikes: 0,
     healthScore: 0,
     analyzedInstructions: "",
-    image: "",
+    image: "" ,
     diets: [],
   });
-
+  
   // handlers
 
   function handleSelectDiet(e) {
@@ -85,12 +92,12 @@ export default function RecipeCreate() {
     });
   }
 
-
+ 
 
   function handleSubmit(e) {
     console.log(id)
 
-    if (!input.title && !input.summary && !input.image && input.diets.length === 0)  {
+    if (!input.title || !input.summary || !input.image || input.diets.length === 0)  {
       e.preventDefault();
       alert("You must complete every field!!");
     }
@@ -111,7 +118,7 @@ export default function RecipeCreate() {
         aggregateLikes: 0,
         healthScore: 0,
         analyzedInstructions: "",
-        image: "",
+        image: "" ,
         diets: [],
       });
 
@@ -120,7 +127,7 @@ export default function RecipeCreate() {
      
     
   } else if (id) {
-   
+    
     dispatch(updateRecipe(id, input));
     alert("updated!");
     history.push("/home");
@@ -130,6 +137,7 @@ export default function RecipeCreate() {
   
   }
   if (recipeUpdate.length > 0) {
+  
   if (id && recipeUpdate[0].title && !updated) {
     setInput({
       ...input,
@@ -169,6 +177,7 @@ export default function RecipeCreate() {
       ? <h1><img src="https://i.ibb.co/nmWgfS3/IMG-4878.png" alt="tiger eating a bone" border="0"/>Create your own Recipe here:</h1>
       : <h1><img src="https://i.ibb.co/nmWgfS3/IMG-4878.png" alt="tiger eating a bone" border="0"/>Update your recipe here:</h1>
       )}
+      {error && <Modal show={true} setShow={clearErrors} message={"Your Recipe ID does not exist in database"} />}
       <div className="form">
         <form onSubmit={(e) => handleSubmit(e)}>
           <div>
