@@ -22,6 +22,7 @@ const putRecipe = async (req, res) => {
       res.send(updatedRecipe);
     } catch (error) {
       res.status(400).send(error);
+      alert("Recipe id is not correct")
     }
   };
   module.exports = putRecipe
