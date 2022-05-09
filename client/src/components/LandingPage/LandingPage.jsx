@@ -19,6 +19,12 @@ export default function LandingPage() {
           <button>Let's go!</button>
         </Link>
       </div>
+      <br></br>
+      <div>
+        <Link to="./about" className="btnLan">
+          <button>About me</button>
+        </Link>
+      </div>
       
     </div>
   );
