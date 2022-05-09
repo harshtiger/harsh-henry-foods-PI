@@ -9,8 +9,9 @@ import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Paginates from "../Paginate/Paginates";
 import SearchBar from "../SearchBar/SearchBar";
-import LoadingHome from "../loading/LoadingHome"
+
 import Modal from "../modal/Modal";
+import Loading from "../loading/Loading";
 
 import "./Home.css"; // estilos
 
@@ -149,8 +150,14 @@ setCurrentPage(pageNumber);}
 
 
   return (
+    
     <div className="home">
+      {allRecipes.length>0? 
+
+
+      (<div className="home">
       <h1>pick one for me!!!<img src="https://i.ibb.co/WFBhFLb/Harsh-Stickers1.png" alt="Harsh-Stickers1" border="0" /></h1>
+      
       <SearchBar />
       {error && <Modal show={true} setShow={clearErrors} message={"No results were found"} />}
       
@@ -161,9 +168,7 @@ setCurrentPage(pageNumber);}
       <Link to="/recipe" className="showAll">
         <button >Create your own recipe</button>
       </Link>
-      <Link to="/home/add/959de012-7527-4802-8cb2-8fa7cd05bd6e">
-        <button>Change Recipe</button>
-      </Link>
+      
 
         <button
           onClick={(e) => {handleClick(e);}}>
@@ -224,9 +229,9 @@ setCurrentPage(pageNumber);}
 
       <div className="cards">
        
-      {allRecipes.length>0? currentRecipes?.map((c) => {
+      {currentRecipes?.map((c) => (
          
-        return  (
+        
           <div key={c.id}>             
             <Link to={"/home/" + c.id} className="linkCard">             
               <Card               
@@ -244,12 +249,13 @@ setCurrentPage(pageNumber);}
                 vegetarian={
                   c.vegetarian === true 
                   ? (<p className="dietsMap">vegetarian</p>) 
-                  :(<p>No veggie option aviable</p>)
-                  }
-                score={c.aggregateLikes}
+                  :(<p>No veggie option aviable</p>)}
+                  score={c.aggregateLikes}
               />              
             </Link>            
-          </div>)}): <LoadingHome/>}  
+          </div>
+          ))}
+         
           
         </div>     
     
@@ -268,6 +274,9 @@ setCurrentPage(pageNumber);}
         currentPage={currentPage}
         />  
          </div>
+
+</div>) 
+: <Loading />}
     </div>
   );
 }

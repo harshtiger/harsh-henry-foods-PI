@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { postRecipe, getDiets, getDetail, updateRecipe, getRecipes } from "../../actions";
-import { useDispatch, useSelector, useStore } from "react-redux";
+import { postRecipe, getDiets, getDetail, updateRecipe } from "../../actions";
+import { useDispatch, useSelector } from "react-redux";
 import "./RecipeCreate.css";
 
 function validate(input) {
@@ -165,8 +165,10 @@ export default function RecipeCreate() {
 
   return (
     <div className="create">
-    
-      <h1><img src="https://i.ibb.co/nmWgfS3/IMG-4878.png" alt="tiger eating a bone" border="0"/>Create your own Recipe here:</h1>
+      { ( !id
+      ? <h1><img src="https://i.ibb.co/nmWgfS3/IMG-4878.png" alt="tiger eating a bone" border="0"/>Create your own Recipe here:</h1>
+      : <h1><img src="https://i.ibb.co/nmWgfS3/IMG-4878.png" alt="tiger eating a bone" border="0"/>Update your recipe here:</h1>
+      )}
       <div className="form">
         <form onSubmit={(e) => handleSubmit(e)}>
           <div>
@@ -257,9 +259,19 @@ export default function RecipeCreate() {
             ))}
             {errors.diets && <p>{errors.diets}</p>}
           </div>
+        
+          {id ? (
           <button type="submit" className="btnCreate">
-            Create Recipe
-          </button>
+           Update Recipe
+          </button>)
+
+
+          : (<button type="submit" className= "btnCreate">
+           Create Recipe
+          </button>)}
+          
+
+
           <Link to="/home">
         <button className="buttonToHome">Back to Home</button>
       </Link>
