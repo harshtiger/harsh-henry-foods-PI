@@ -2,12 +2,13 @@ import React from "react";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail, clearDetails, deleteRecipe, updateRecipe } from "../../actions";
+import { getDetail, clearDetails, deleteRecipe, updateRecipe, clearError } from "../../actions";
 import {  useParams  } from "react-router";
 import { Link, useHistory  } from "react-router-dom";
 import "./Detail.css";
 import Loading from "../loading/Loading";
 import DeleteConfirm from "../modal/DeleteConfirm"
+import Modal from "../modal/Modal";
 
 
 
@@ -20,7 +21,10 @@ export default function Detail(props) {
   const dispatch = useDispatch();
   const [/*cambio*/, setCambio] = useState(false);
   const detail = useSelector((state) => state.detail);
+  const error = useSelector(state => state.error);
+
   const [popUp, setPopUp] = useState(false);
+
   
   
   const { id } = useParams();
@@ -37,6 +41,11 @@ export default function Detail(props) {
     
   }, [props.match.params.id, dispatch]);
 
+
+  const clearErrors = () => {  // manejo de errores para la ventana modal
+    dispatch(clearError());
+    history.push("/home")
+}
  
 
   //delete
@@ -69,25 +78,28 @@ export default function Detail(props) {
 
   return (
     <div className="detail">
+      
+      {error && <Modal show={true} setShow={clearErrors} message={"There was a problem with your Recipe ID. Lets go back"} />}
+      
       <Link to="/home">
         <button>Back to Home</button>
       </Link>
                
-            ({id.length > 8
+            {id.length > 8
               ?<button onClick={handleUpdata} >
                 Update recipe!
               </button>
-              :<br></br>})
+              :<br></br>}
 
-({id.length > 8
+{id.length > 8
               ?<button onClick={handleDeleteClick} >
                Delete Recipe
               </button>
-              :<br></br>})
+              :<br></br>}
 
 
-      {detail.length ? 
-      (<div>
+{detail.length ?
+      <div>
           <h1> "{detail[0].title}"</h1>
           
           <img src={detail[0].image 
@@ -161,9 +173,9 @@ export default function Detail(props) {
 
         </div>
 
-        </div>) 
+        </div> 
 
-        : (<Loading />)}
+        : <Loading />}
 
         </div>
   );

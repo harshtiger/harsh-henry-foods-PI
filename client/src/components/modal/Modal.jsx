@@ -17,7 +17,7 @@ const Content = styled.div`
 `;
 
 const Span = styled.span`
-    background-color: #41414100;
+    background-color: #FFFFFF;
     border: 1px solid #414141;
     justify-content: center;
     text-align: center;
