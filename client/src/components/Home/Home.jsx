@@ -11,18 +11,21 @@ import Paginates from "../Paginate/Paginates";
 import SearchBar from "../SearchBar/SearchBar";
 
 import Modal from "../modal/Modal";
+import Modal2 from "../modal/Modal";
 import Loading from "../loading/Loading";
+
 
 import "./Home.css"; // estilos
 
 
-export default function Home(props) {
+export default function Home() {
 
   const [, /*refreshState*/ setRefreshState] = useState(false);
   const dispatch = useDispatch();
   const allRecipes = useSelector((state) => state.recipes);
   const diets = useSelector((state) => state.diets);
   const error = useSelector(state => state.error);
+  const [popUp2, setPopUp2] = useState(false)
  
 
   //Paginado:
@@ -120,6 +123,12 @@ setCurrentPage(pageNumber);}
     dispatch(clearError());
 }
 
+const clearErrors2 = () => {  // manejo de errores para la ventana modal
+  setPopUp2(false);
+  
+}
+
+
   function handleClick(e) {    
     e.preventDefault();
     
@@ -161,7 +170,9 @@ setCurrentPage(pageNumber);}
       (<div className="home">
       <h1>pick one for me!!!<img src="https://i.ibb.co/WFBhFLb/Harsh-Stickers1.png" alt="Harsh-Stickers1" border="0" /></h1>
       
-      <SearchBar />
+      <SearchBar 
+      setPopUp2 = {setPopUp2}/>
+      {popUp2 && <Modal2 show={true} setShow={clearErrors2} message={"Complete every field!"} /> }
       {error && <Modal show={true} setShow={clearErrors} message={"No results were found"} />}
       
       

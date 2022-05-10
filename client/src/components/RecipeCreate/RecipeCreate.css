@@ -53,7 +53,7 @@
   margin-bottom: 0;
   margin-left: auto;
   margin-right: auto;
-  font-size: 40px;
+  font-size: 60px;
   text-shadow: rgb(19, 19, 18) -3px 1px;
   font-family:Arial, Helvetica, sans-serif ;
   color: rgb(255, 255, 255);
@@ -83,9 +83,9 @@
   color: white;
 }
 
-.create h1 img {
-  height: 60px;
-  width: 60px;
+.create h1 .harsh {
+  height: 80px;
+  width: 80px;
  
   
   margin-left: auto;

@@ -80,100 +80,94 @@ export default function Detail(props) {
     <div className="detail">
       
       {error && <Modal show={true} setShow={clearErrors} message={"There was a problem with your Recipe ID. Lets go back"} />}
-      
-      <Link to="/home">
-        <button>Back to Home</button>
-      </Link>
-               
-            {id.length > 8
-              ?<button onClick={handleUpdata} >
-                Update recipe!
-              </button>
-              :<br></br>}
+      {detail.length ? 
+      <><div>
+          <Link to="/home">
+            <button>Back to Home</button>
+          </Link>
 
-{id.length > 8
-              ?<button onClick={handleDeleteClick} >
-               Delete Recipe
-              </button>
-              :<br></br>}
+          {id.length > 8
+            ? <button onClick={handleUpdata}>
+              Update recipe!
+            </button>
+            : <br></br>}
 
+          {id.length > 8
+            ? <button onClick={handleDeleteClick}>
+              Delete Recipe
+            </button>
+            : <br></br>}
 
-{detail.length ?
-      <div>
-          <h1> "{detail[0].title}"</h1>
-          
-          <img src={detail[0].image 
-          ?(detail[0].image) 
-          :(<img src="https://shorturl.ae/eEB8K" alt="img plate"/>)} alt="img recipe"/>
+        </div><div>
+            <h1> "{detail[0].title}"</h1>
 
-          <div className="h3-2">
+            <img className="detailImg" src={detail[0].image
+              ? (detail[0].image)
+              : (<img src="https://shorturl.ae/eEB8K" alt="img plate" />)} alt="img recipe" />
 
-            {detail[0].createdDb 
-            ?(<h2>Type of Diets: {detail[0].diets.map((d) => d.name).join(", ")}</h2>) 
-            :(<h2>Type of Diets:
-                {detail[0].vegetarian === true
-                  ? " " + detail[0].diets.join(", ") + ", vegetarian"
-                  : " " + detail[0].diets.join(", ")}
-              </h2>)}
+            <div className="h3-2">
 
-            <h2>
               {detail[0].createdDb
-                ? null
-                : "Dish types: " + detail[0].dishTypes.join(", ")}
-            </h2>
+                ? (<h2>Type of Diets: {detail[0].diets.map((d) => d.name).join(", ")}</h2>)
+                : (<h2>Type of Diets:
+                  {detail[0].vegetarian === true
+                    ? " " + detail[0].diets.join(", ") + ", vegetarian"
+                    : " " + detail[0].diets.join(", ")}
+                </h2>)}
 
-           
-          </div>
+              <h2>
+                {detail[0].createdDb
+                  ? null
+                  : "Dish types: " + detail[0].dishTypes.join(", ")}
+              </h2>
 
 
-          
-
-{popUp &&  
-        <DeleteConfirm
-        
-          show={true} setShow={setPopUp}
-          text="Are you sure you want to delete this recipe??"
-          
-          acceptPopUp={acceptPopUp}
-          cancelPopUp={cancelPopUp}
-
-          
-        /> }
+            </div>
 
 
 
-          <div className="details">
-            {detail[0].aggregateLikes !== 0 
-            ?(<h2>Score: {detail[0].aggregateLikes}</h2>) 
-            :(<h2>Score: - </h2>)}
+
+            {popUp &&
+              <DeleteConfirm
+
+                show={true} setShow={setPopUp}
+                text="Are you sure you want to delete this recipe??"
+
+                acceptPopUp={acceptPopUp}
+                cancelPopUp={cancelPopUp} />}
 
 
-            {detail[0].healthScore !== 0 
-            ?(<h2>Health Score: {detail[0].healthScore}</h2>) 
-            :(<h2>Health Score: - </h2>)}
 
-            <h2>Summary:</h2>
-
-            <p>{detail[0].summary.replace(/<[^>]*>?/g, "")}</p>
-            {detail[0].analyzedInstructions 
-            ?(<h2>Step by step instructions: </h2>) 
-            :(<h2>Step by step instructions: - </h2>)}
+            <div className="details">
+              {detail[0].aggregateLikes !== 0
+                ? (<h2>Score: {detail[0].aggregateLikes}</h2>)
+                : (<h2>Score: - </h2>)}
 
 
-            {detail[0].analyzedInstructions.length > 0 
-            ?(<ul>{detail[0].createdDb 
-              ?(<li>{detail[0].analyzedInstructions}</li>) 
+              {detail[0].healthScore !== 0
+                ? (<h2>Health Score: {detail[0].healthScore}</h2>)
+                : (<h2>Health Score: - </h2>)}
 
-              :(detail[0].analyzedInstructions[0].steps.map((p) => 
+              <h2>Summary:</h2>
 
-              (<li key={p.number}>{p.step}</li>)))}
-              </ul>) 
+              <p>{detail[0].summary.replace(/<[^>]*>?/g, "")}</p>
+              {detail[0].analyzedInstructions
+                ? (<h2>Step by step instructions: </h2>)
+                : (<h2>Step by step instructions: - </h2>)}
 
-              :(<p>Vegetarian</p>)}
 
-        </div>
+              {detail[0].analyzedInstructions.length > 0
+                ? (<ul>{detail[0].createdDb
+                  ? (<li>{detail[0].analyzedInstructions}</li>)
 
-        </div> 
+                  : (detail[0].analyzedInstructions[0].steps.map((p) => (<li key={p.number}>{p.step}</li>)))}
+                </ul>)
+
+                : (<p>Vegetarian</p>)}
+
+            </div>
+
+          </div></> 
 
         : <Loading />}
 

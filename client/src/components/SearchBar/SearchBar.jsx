@@ -5,7 +5,7 @@ import { getNameRecipe } from "../../actions";
 
 import "./SearchBar.css";
 
-export default function SearchBar() {
+export default function SearchBar({setPopUp2}) {
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");
@@ -17,7 +17,7 @@ export default function SearchBar() {
   function handleSubmit(e) {
     e.preventDefault();
     if (!name) {
-      return alert("It's required to enter a name in order to make a search")
+      setPopUp2(()=> true)
     } else {
      
     dispatch(getNameRecipe(name));   
@@ -35,7 +35,7 @@ export default function SearchBar() {
     if (event.charCode === 13) {
       
       if (!name) {
-        return alert("It's required to enter a name in order to make a search")
+        setPopUp2(()=> true)
       } else {
       dispatch(getNameRecipe(name, dispatch));
       setName("");

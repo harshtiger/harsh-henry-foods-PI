@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import modal2 from "../../assets/modal2.png"
 
 const Content = styled.div`
     position: relative;
@@ -75,7 +76,7 @@ const Modal = ({show, message, setShow}) => {
 
     return(
         <Modaldiv>
-            <Content><h1><Img src= "https://i.ibb.co/VC2NbrX/404harsh.png" alt="harshfood" border="0" /></h1>
+            <Content><h1><Img src= {modal2} alt="harsh" border="0" /></h1>
             <Span onClick={e => setShow(false)}> x</Span>
                 {message} 
             </Content>
