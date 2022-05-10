@@ -18,7 +18,7 @@ export default function About () {
         <p>Hello! I am sam, the web developer behind this SPA.</p>
         <p>
           This SPA was made as my personal project for <a rel="noreferrer" target="_blank" href="https://www.soyhenry.com/">Henry's </a>
-           fullstack web developer bootcamp.<br></br>
+          fullstack web developer bootcamp.<br></br>
           It's basically an app to look up for cooking  recipes.<br></br>
           It is fully CRUD as you can create, read, update and delete your recipes.
         </p>

@@ -34,6 +34,10 @@ export default function RecipeCreate() {
   const [errors, setErrors] = useState({});
   const [updated, setUpdated] = useState(false);
   const error = useSelector(state => state.error);
+  const [popUp, setPopUp] = useState(false);
+  const[isUpdated, setIsUpdated] = useState(false);
+  const[empty, setEmpty] = useState(false)
+  
 
   // put
 
@@ -95,10 +99,16 @@ export default function RecipeCreate() {
  
 
   function handleSubmit(e) {
-    console.log(id)
+    
+    
+    
 
     if (!input.title || !input.summary || !input.image || input.diets.length === 0)  {
+     
       e.preventDefault();
+      
+      //setEmpty(()=> true)
+      console.log(empty)
       alert("You must complete every field!!");
     }
     
@@ -111,7 +121,9 @@ export default function RecipeCreate() {
       
         
       dispatch(postRecipe(input));
-      alert("Recipe succesfully Created!!");
+      
+      setPopUp(()=> true)
+     
       setInput({
         title: "",
         summary: "",
@@ -122,16 +134,16 @@ export default function RecipeCreate() {
         diets: [],
       });
 
-     history.push("/home");
+    
      
      
     
   } else if (id) {
     
     dispatch(updateRecipe(id, input));
-    alert("updated!");
-    history.push("/home");
-   
+    setIsUpdated(()=> true)
+    console.log(isUpdated)
+ 
   } 
 }
   
@@ -177,6 +189,9 @@ export default function RecipeCreate() {
       ? <h1><img src="https://i.ibb.co/nmWgfS3/IMG-4878.png" alt="tiger eating a bone" border="0"/>Create your own Recipe here:</h1>
       : <h1><img src="https://i.ibb.co/nmWgfS3/IMG-4878.png" alt="tiger eating a bone" border="0"/>Update your recipe here:</h1>
       )}
+      
+      {popUp && <Modal show={true} setShow={clearErrors} message={"Created!"} /> }
+      {isUpdated && <Modal show={true} setShow={clearErrors} message={"updated!"} /> }
       {error && <Modal show={true} setShow={clearErrors} message={"Your Recipe ID does not exist in database"} />}
       <div className="form">
         <form onSubmit={(e) => handleSubmit(e)}>
@@ -214,7 +229,10 @@ export default function RecipeCreate() {
               type="number"
               value={input.aggregateLikes}
               name="aggregateLikes"
+              min="0"
+              max="10000"
               onChange={(e) => handleChange(e)}
+
             />
           </div>
           <div>
@@ -224,6 +242,8 @@ export default function RecipeCreate() {
               type="number"
               value={input.healthScore}
               name="healthScore"
+              min="0"
+              max="10000"
               onChange={(e) => handleChange(e)}
             />
           </div>

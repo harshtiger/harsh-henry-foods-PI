@@ -82,17 +82,32 @@ function rootReducer(state = initialState, action) {
       const filteredRecipesApi = recipesApi.filter((r) =>
         r.diets.includes(action.payload)
       );
-      const recipeDb = allRecipes.filter((r) => r.createdDb);
-      const filteredRecipeDb = recipeDb.filter(
-        (r) => r.diets.name === action.payload
-      );
-      const filtered = filteredRecipeDb.concat(filteredRecipesApi);
+           
+      const recipeDb = allRecipes.filter((r) => r.createdDb);     
+
+
+     let c =[]  
+      recipeDb.forEach(e=> {
+        if(e.hasOwnProperty('diets') && e.diets.find(c=> c.name === action.payload)) {
+            c.push(e);
+        }
+    })
+
+    let vegie = []
+    recipeDb.forEach(e=> {
+      if(e.hasOwnProperty('diets') && e.diets.find(c=> c.name === 'vegetarian')) {
+          vegie.push(e);
+      }
+  })
+
+  
+
+
+      const filtered = c.concat(filteredRecipesApi);
       const vegetarianApi = allRecipes.filter((r) => r.vegetarian === true);
-      const vegetarianDb = recipeDb.filter(
-        (r) => r.diets.name === "vegetarian"
-      );
-      const vegetarian = vegetarianDb.concat(vegetarianApi);
+      const vegetarian = vegie.concat(vegetarianApi);
       const ternario = action.payload === "vegetarian" ? vegetarian : filtered;
+     
 
       return {
         ...state,
