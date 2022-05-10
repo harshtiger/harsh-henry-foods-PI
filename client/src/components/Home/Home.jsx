@@ -16,13 +16,14 @@ import Loading from "../loading/Loading";
 import "./Home.css"; // estilos
 
 
-export default function Home() {
+export default function Home(props) {
 
   const [, /*refreshState*/ setRefreshState] = useState(false);
   const dispatch = useDispatch();
   const allRecipes = useSelector((state) => state.recipes);
   const diets = useSelector((state) => state.diets);
   const error = useSelector(state => state.error);
+ 
 
   //Paginado:
  
@@ -109,6 +110,7 @@ setCurrentPage(pageNumber);}
   }, [dispatch]);
   
 
+
   useEffect(() => {
     dispatch(getTypesOfDiet());  // trae los tipos  de  dieta
   }, [dispatch]);
@@ -145,8 +147,9 @@ setCurrentPage(pageNumber);}
     dispatch(orderByScoreLikes(e.target.value));
     setCurrentPage(1);
     setOrderLike("Order" + e.target.value);
-  }
 
+  }
+ 
 
 
   return (

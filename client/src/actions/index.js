@@ -66,6 +66,8 @@ export function getTypesOfDiet() {
   };
 }
 
+
+
 export function clearError()  {
   return {
       type: CLEAR_ERROR
@@ -77,10 +79,10 @@ export const setPagIndexes = (indexOfLastRecipe, indexOfFirstRecipe) => {
 };
 
 
-export function filterByDiet(payload) {
+export function filterByDiet(diets) {
   return {
     type: "FILTER_BY_DIET",
-    payload,
+    payload:diets,
   };
 }
 
