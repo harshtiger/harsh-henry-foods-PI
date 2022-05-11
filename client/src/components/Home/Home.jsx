@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {getRecipes, filterByDiet, getTypesOfDiet, orderByName, orderByScoreLikes,
-        clearError, setPagIndexes} from "../../actions";
+        clearError, setPagIndexes, getDB} from "../../actions";
 
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
@@ -111,7 +111,8 @@ setCurrentPage(pageNumber);}
   dispatch(getRecipes());  // trae todas las recetas
   setCambio(true);    
   }, [dispatch]);
-  
+
+
 
 
   useEffect(() => {
@@ -127,6 +128,15 @@ const clearErrors2 = () => {  // manejo de errores para la ventana modal
   setPopUp2(false);
   
 }
+
+function handleClickDB(e) {
+  e.preventDefault();
+  dispatch(getDB(e.target.value));
+  setCurrentPage(1);
+  //setRefreshState((prevState) => !prevState);
+ 
+}
+
 
 
   function handleClick(e) {    
@@ -182,6 +192,7 @@ const clearErrors2 = () => {  // manejo de errores para la ventana modal
       <Link to="/recipe" className="showAll">
         <button >Create your own recipe</button>
       </Link>
+
       
 
         <button
@@ -192,6 +203,14 @@ const clearErrors2 = () => {  // manejo de errores para la ventana modal
 
    
       <div className="select">
+      <span className="span"> Order by origin</span>
+      <select onChange={(e) =>handleClickDB(e)}>
+              <option value="default" hidden >Show Your Recipes</option>
+              <option value="all">All</option>
+              <option value="api">Api</option>
+              <option value="created">Created</option>
+            </select>
+
 
 
         <span className="span">Order by Recipe Name</span>

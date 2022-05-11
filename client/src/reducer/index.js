@@ -11,6 +11,7 @@ import {
   ERROR_OCURRED,
   CLEAR_ERROR,
   CLEAR_DETAILS,
+  GET_DB,
 
   PAG_INDEXES,
   DELETE_RECIPE, 
@@ -21,7 +22,7 @@ import {
 
 const initialState = {
   recipes: [],
-  copyRecipes: [],
+  DBrecipes: [],
   allRecipes: [],
   diets: [],
   detail: [],
@@ -60,6 +61,7 @@ function rootReducer(state = initialState, action) {
         diets: action.payload,
       };
 
+     
 
       case PAG_INDEXES: 
         return {
@@ -76,6 +78,13 @@ function rootReducer(state = initialState, action) {
           
         }
 
+
+      
+
+      
+
+
+
       
     case FILTER_BY_DIET:
       let allRecipes = state.allRecipes;
@@ -84,7 +93,9 @@ function rootReducer(state = initialState, action) {
         r.diets.includes(action.payload)
       );
            
-      const recipeDb = allRecipes.filter((r) => r.createdDb);     
+      const recipeDb = allRecipes.filter((r) => r.createdDb); 
+      
+     
 
 
      let c =[]  
@@ -93,6 +104,7 @@ function rootReducer(state = initialState, action) {
             c.push(e);
         }
     })
+    console.log(c)
 
     let vegie = []
     recipeDb.forEach(e=> {
@@ -108,6 +120,7 @@ function rootReducer(state = initialState, action) {
       const vegetarianApi = allRecipes.filter((r) => r.vegetarian === true);
       const vegetarian = vegie.concat(vegetarianApi);
       const ternario = action.payload === "vegetarian" ? vegetarian : filtered;
+      console.log(recipeDb)
      
 
       return {
@@ -115,6 +128,34 @@ function rootReducer(state = initialState, action) {
         recipes: action.payload === "default" ? allRecipes : ternario,
         
       };
+
+
+      case GET_DB:
+        let allRecipes2 = state.allRecipes;
+        
+      const recipesApi2 = allRecipes2.filter((r) => !r.createdDb);
+
+      const recipeDb2 = allRecipes2.filter((r) => r.createdDb);
+
+          var getByDB =
+          action.payload === "created"
+            ? recipeDb2
+            : recipesApi2;
+        if (action.payload === "all") getByDB = state.allRecipes;
+        console.log(getByDB)
+        //if (!getRecipesByDB.length)
+        
+          //return { ...state, errors: { created: true } };
+
+        return {
+          ...state,
+          recipes: getByDB,
+          errors: {},
+          
+          
+        };
+
+      
     case ORDER_BY_NAME:
      
       let sortedRecipes =
