@@ -179,10 +179,11 @@ const clearErrors2 = () => {  // manejo de errores para la ventana modal
       healthScore: recipeUpdate[0].healthScore,
       analyzedInstructions: recipeUpdate[0].analyzedInstructions,
       image: recipeUpdate[0].image,
-      diets: []
+      diets: [recipeUpdate[0].diets.map((d) => d.name).join(", ")],
       
-      //{detail[0].diets.map((d) => d.name).join(", ")}
+     
     });
+    //console.log(recipeUpdate[0].diets.map((d) => d.name).join(", "))
     setUpdated(!updated);
   }
   }

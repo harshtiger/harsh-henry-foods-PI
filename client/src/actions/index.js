@@ -44,7 +44,7 @@ export function getRecipes() {
       dispatch({type: GET_RECIPES, payload: json})
     })
     .catch(error => dispatch({type: ERROR_OCURRED, payload: error.toString()},
-     console.log("Error, could not get recipes, due to a connection problem")))
+     console.log("Error, could not get recipes, API connection was refussed")))
   };
 }
 

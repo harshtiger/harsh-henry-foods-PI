@@ -71,9 +71,9 @@ const handleSupPrev = () => {
 
 const handlePrev = () => {
   if (currentPage !== 1) {
-    setCurrentPage(currentPage - 1);
     window.scrollTo( 0, 0 );
-    if (currentPage - 1 < minPageDisplay) {
+    setCurrentPage(currentPage - 1);
+      if (currentPage - 1 < minPageDisplay) {
       setMaxPageDisplay(maxPageDisplay - pagesDisplayLimit < 5 ? 5 : maxPageDisplay - pagesDisplayLimit);
       setMinPageDisplay(minPageDisplay - pagesDisplayLimit <= 0 ? 1 : minPageDisplay - pagesDisplayLimit);
     }
@@ -105,6 +105,7 @@ const handleSupNext = () => {
 
   
 function paginate(pageNumber) {  // seteo la pagina acorde al click en el boton, hiper simple
+window.scrollTo( 0, 0 );
 setCurrentPage(pageNumber);}
 
 // fin del paginado
@@ -118,6 +119,7 @@ setCurrentPage(pageNumber);}
 
   useEffect(() => {
   dispatch(getRecipes());  // trae todas las recetas
+  
   setCambio(true);    
   }, [dispatch]);
 
