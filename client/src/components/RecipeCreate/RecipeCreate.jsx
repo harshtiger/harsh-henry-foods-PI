@@ -10,7 +10,7 @@ function validate(input) {
   let errors = {};
   
   input.title
-    ? (errors.title = "")
+    ? (errors.title = "" )
     : (errors.title = "You must name the recipe");
   input.summary
     ? (errors.summary = "")
@@ -28,25 +28,33 @@ function validate(input) {
 
 export default function RecipeCreate() {
   const recipeUpdate = useSelector( state => state.detail)
-
   const dispatch = useDispatch();
-  const history = useHistory();
+
+  const history = useHistory();// para irme a casa despues de crear o updatear
+
   const diets = useSelector((state) => state.diets);
-  const [errors, setErrors] = useState({});
-  const [updated, setUpdated] = useState(false);
+
+  const [errors, setErrors] = useState({}); //manejo de errores
+
+  const [updated, setUpdated] = useState(false);// c r u d
+  const[isUpdated, setIsUpdated] = useState(false); // c r u d
+  
+
   const error = useSelector(state => state.error);
+
   const [popUp, setPopUp] = useState(false);
   const [popUp2, setPopUp2] = useState(false);
-  const[isUpdated, setIsUpdated] = useState(false);
+
+  
   
   
 
-  // put
-
-  const {id} = useParams();
  
 
-  const clearErrors = () => {  // manejo de errores para la ventana modal
+ const {id} = useParams(); // para el put
+ 
+
+const clearErrors = () => {  // manejo de errores para la ventana modal
     dispatch(clearError());
     history.push("/home")
 }
@@ -63,7 +71,7 @@ const clearErrors2 = () => {  // manejo de errores para la ventana modal
   useEffect(() => {// esto trae las diets
     dispatch(getDiets());
     
-    id && dispatch(getDetail(id));
+    id && dispatch(getDetail(id)); // trae details para el put
   }, [dispatch, id]);
   
   const [input, setInput] = useState({
@@ -206,7 +214,7 @@ const clearErrors2 = () => {  // manejo de errores para la ventana modal
       {popUp2 && <Modal2 show={true} setShow={clearErrors2} message={"Complete every field!"} /> }
       {popUp && <Modal show={true} setShow={clearErrors} message={"Recipe created!"} /> }
       {isUpdated && <Modal show={true} setShow={clearErrors} message={"Recipe updated!"} /> }
-      {error && <Modal show={true} setShow={clearErrors} message={"Your Recipe ID does not exist in database"} />}
+      {error && <Modal2 show={true} setShow={clearErrors} message={"Your Recipe ID does not exist in database"} />}
       <div className="form">
         <form onSubmit={(e) => handleSubmit(e)}>
           <div>

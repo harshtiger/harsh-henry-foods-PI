@@ -39,7 +39,7 @@ const Span = styled.span`
     }
 `;
 
-const Img = styled.img `
+const Img2 = styled.img `
 
 height: 250px;
 width: 250px;
@@ -76,7 +76,7 @@ const Modal = ({show, message, setShow}) => {
 
     return(
         <Modaldiv>
-            <Content><h1><Img src= {modal2} alt="harsh" border="0" /></h1>
+            <Content><h1><Img2 src= {modal2} alt="harsh" border="0" /></h1>
             <Span onClick={e => setShow(false)}> x</Span>
                 {message} 
             </Content>

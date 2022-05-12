@@ -11,7 +11,9 @@ import {
   ERROR_OCURRED,
   CLEAR_ERROR,
   CLEAR_DETAILS,
-  GET_DB,
+
+
+ 
 
   PAG_INDEXES,
   DELETE_RECIPE, 
@@ -129,31 +131,10 @@ function rootReducer(state = initialState, action) {
         
       };
 
+      
 
-      case GET_DB:
-        let allRecipes2 = state.allRecipes;
-        
-      const recipesApi2 = allRecipes2.filter((r) => !r.createdDb);
 
-      const recipeDb2 = allRecipes2.filter((r) => r.createdDb);
 
-          var getByDB =
-          action.payload === "created"
-            ? recipeDb2
-            : recipesApi2;
-        if (action.payload === "all") getByDB = state.allRecipes;
-        console.log(getByDB)
-        //if (!getRecipesByDB.length)
-        
-          //return { ...state, errors: { created: true } };
-
-        return {
-          ...state,
-          recipes: getByDB,
-          errors: {},
-          
-          
-        };
 
       
     case ORDER_BY_NAME:

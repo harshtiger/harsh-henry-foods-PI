@@ -75,7 +75,7 @@ const Modal = ({show, message, setShow}) => {
 
     return(
         <Modaldiv>
-            <Content><h1><Img src= "https://i.ibb.co/VC2NbrX/404harsh.png" alt="harshfood" border="0" /></h1>
+            <Content><h1><Img src= "https://i.ibb.co/pW9f0xd/Harsh-Stickers2.png" alt="harshfood" border="0" /></h1>
             <Span onClick={e => setShow(false)}> x</Span>
                 {message} 
             </Content>

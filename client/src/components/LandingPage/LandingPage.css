@@ -4,56 +4,37 @@
   position:fixed;
   background-image: url("../../assets/bkgLanding.jpg");
   background-color: black;
- 
-  
-
-
 }
 
 .landing h1 img {
   height: 150px;
-  width: 150px;
-  
+  width: 150px;  
   margin-left: auto;
   margin-right: auto;
-padding: 10px;
+  padding: 10px;
   display: flex;
   padding-left: 25px;
-padding-right: 25px;
+  padding-right: 25px;
    
 
 }
 
 .landing h1 {
-  background-color: black;
-  
+ background-color: black;
   
  width: fit-content;
  height: fit-content;
  margin-left: auto;
  margin-right: auto;
-  
-
  border-radius: 15px;
-padding-left: 25px;
-padding-right: 25px;
-  
- 
- 
-
-
-  display:flex;
- 
-  
-
-  
-  color: rgba(255, 153, 0, 0.926);
-  text-shadow: rgb(0, 0, 0) -6px 3px;
-
-
-  font-size: 100px;
-  font-family:Arial, Helvetica, sans-serif;
-  font-weight: 800;
+ padding-left: 25px;
+ padding-right: 25px;
+ display:flex;
+ color: rgba(255, 153, 0, 0.926);
+ text-shadow: rgb(0, 0, 0) -6px 3px;
+ font-size: 100px;
+ font-family:Arial, Helvetica, sans-serif;
+ font-weight: 800;
  
   
 }
@@ -75,8 +56,6 @@ padding-right: 25px;
   color: #ffffff;
   margin-left: 45vw;
   font-size: 30px;
-  
-
 
 }
 

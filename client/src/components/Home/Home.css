@@ -8,10 +8,7 @@
   height: auto;
   position:initial;
   background-color: black;
-  background-image: url("../../assets/bbck.jpg");
- 
-  
-  
+  background-image: url("../../assets/bbck.jpg"); 
     
 }
 
@@ -23,28 +20,19 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 0px;
-
-  
-   display:flex;
-  
-   
- 
-   
-   color: rgba(255, 153, 0, 0.926);
-   text-shadow: rgb(0, 0, 0) -6px 3px;
- 
- 
-   font-size: 110px;
-   font-family:Arial, Helvetica, sans-serif;
-   font-weight: 100;
+  display:flex;
+  color: rgba(255, 153, 0, 0.926);
+  text-shadow: rgb(0, 0, 0) -6px 3px; 
+  font-size: 110px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight: 100;
   
    
 }
 
 .home h1 img {
   height: 110px;
-  width: 110px;
-  
+  width: 110px;  
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
@@ -80,8 +68,7 @@
 
 .showAll {
   display: flex;
-  justify-content: center;
- 
+  justify-content: center; 
   margin-bottom: 0px;
   margin-left: auto;
   margin-right: auto;
@@ -95,11 +82,11 @@
   border-radius: 100px;
   display: flex;
   justify-content: center;
- text-decoration: none;
+  text-decoration: none;
   align-items: center;
   width: 230px;
- margin-left: auto;
- margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
   height: 55px;
   background-color: rgb(215, 210, 210);
   transition: background-color 0.25s, color 0.25s;

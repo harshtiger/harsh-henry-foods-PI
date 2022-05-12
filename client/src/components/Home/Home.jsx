@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {getRecipes, filterByDiet, getTypesOfDiet, orderByName, orderByScoreLikes,
-        clearError, setPagIndexes, getDB} from "../../actions";
+        clearError, setPagIndexes, } from "../../actions";
 
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Paginates from "../Paginate/Paginates";
 import SearchBar from "../SearchBar/SearchBar";
 
+// manejo de errores y loading screen
 import Modal from "../modal/Modal";
 import Modal2 from "../modal/Modal";
 import Loading from "../loading/Loading";
@@ -20,7 +21,7 @@ import "./Home.css"; // estilos
 
 export default function Home() {
 
-  const [, /*refreshState*/ setRefreshState] = useState(false);
+  
   const dispatch = useDispatch();
   const allRecipes = useSelector((state) => state.recipes);
   const diets = useSelector((state) => state.diets);
@@ -40,6 +41,7 @@ export default function Home() {
   const [maxPageDisplay, setMaxPageDisplay] = useState(5);
   const [minPageDisplay, setMinPageDisplay] = useState(1);
 
+  
   let lastpage = [];
   for (let i = 1; i <= Math.ceil(allRecipes.length / recipesPerPage); i++) {  // la ultima pagina, esto lo uso de indice para mi nextSup
   lastpage.push(i);    
@@ -60,6 +62,7 @@ useEffect(() => {
 
 const handleSupPrev = () => {
   if (currentPage !== 1) {
+    window.scrollTo( 0, 0 );// esta linea magica de codigo hermosa hace que se carge la pag. arriba de todo cuando pagino
     setCurrentPage(1);
     setMaxPageDisplay(5);
     setMinPageDisplay(1);
@@ -69,6 +72,7 @@ const handleSupPrev = () => {
 const handlePrev = () => {
   if (currentPage !== 1) {
     setCurrentPage(currentPage - 1);
+    window.scrollTo( 0, 0 );
     if (currentPage - 1 < minPageDisplay) {
       setMaxPageDisplay(maxPageDisplay - pagesDisplayLimit < 5 ? 5 : maxPageDisplay - pagesDisplayLimit);
       setMinPageDisplay(minPageDisplay - pagesDisplayLimit <= 0 ? 1 : minPageDisplay - pagesDisplayLimit);
@@ -80,6 +84,8 @@ const handlePrev = () => {
 const handleNext = () => {
   if (currentPage !== lastpage.length) {
     setCurrentPage(currentPage + 1);
+    window.scrollTo( 0, 0 );
+    console.log("holiiis")
     if (currentPage + 1 > maxPageDisplay) {
       setMaxPageDisplay(maxPageDisplay + pagesDisplayLimit);
       setMinPageDisplay(minPageDisplay + pagesDisplayLimit);
@@ -90,6 +96,7 @@ const handleNext = () => {
 const handleSupNext = () => {
   const lastPage = lastpage.length;
   if (currentPage !== lastPage) {
+    window.scrollTo( 0, 0 );
     setCurrentPage(lastPage);
     setMaxPageDisplay(lastPage);
     setMinPageDisplay(lastPage - pagesDisplayLimit + 1);
@@ -97,8 +104,10 @@ const handleSupNext = () => {
 };
 
   
-function paginate(pageNumber) {  // seteo la pagina acorde al click en el boton
+function paginate(pageNumber) {  // seteo la pagina acorde al click en el boton, hiper simple
 setCurrentPage(pageNumber);}
+
+// fin del paginado
 
 
 //  manejo de orden de recetas
@@ -129,28 +138,21 @@ const clearErrors2 = () => {  // manejo de errores para la ventana modal
   
 }
 
-function handleClickDB(e) {
-  e.preventDefault();
-  dispatch(getDB(e.target.value));
-  setCurrentPage(1);
-  //setRefreshState((prevState) => !prevState);
- 
-}
 
 
 
-  function handleClick(e) {    
-    e.preventDefault();
-    
-    dispatch(getRecipes());
+
+
+  function handleClick(e) {     // si bien esto es disparado por el boton all recipes
+    e.preventDefault();         // la verdad es que es un refresh
+    dispatch(getRecipes());     // con el me traigo todas las resetas y filtro todos los selects
+    reset()                     // aun asi, le deje all recipes al btn pq me parecio mas user friendly y lindo jaja
   }
 
   function handleSelectTypeOfDiet(e) {         
-    dispatch(filterByDiet(e.target.value));
-    
+    dispatch(filterByDiet(e.target.value));    
     setCurrentPage(1)
-
-    setRefreshState((prevState) => !prevState);    
+      
   }
 
   function handleSelectByName(e) {
@@ -168,7 +170,37 @@ function handleClickDB(e) {
     setOrderLike("Order" + e.target.value);
 
   }
+
+
+
+  // aca manejo el reseteo de los selects de filtrado cuando refresco todo
+  function reset() {
+    resetOrderAlpha();
+    resetOrderScore();
+    resetOrderDiets();
+}
  
+  function resetOrderScore(){
+    var score = document.getElementById('orderScore')
+    for (var i = 0, l = score.length; i < l; i++) {
+        score[i].selected = score[i].defaultSelected;
+    }
+  }
+
+  function resetOrderDiets(){
+    var diets = document.getElementById('orderDiets')
+    for (var i = 0, l = diets.length; i < l; i++) {
+        diets[i].selected = diets[i].defaultSelected;
+    }
+}
+
+function resetOrderAlpha(){
+  var alpha = document.getElementById('orderAlpha')
+  for (var i = 0, l = alpha.length; i < l; i++) {
+      alpha[i].selected = alpha[i].defaultSelected;
+  }
+}
+
 
 
   return (
@@ -193,7 +225,7 @@ function handleClickDB(e) {
         <button >Create your own recipe</button>
       </Link>
 
-      
+  
 
         <button
           onClick={(e) => {handleClick(e);}}>
@@ -203,34 +235,31 @@ function handleClickDB(e) {
 
    
       <div className="select">
-      <span className="span"> Order by origin</span>
-      <select onChange={(e) =>handleClickDB(e)}>
-              <option value="default" hidden >Show Your Recipes</option>
-              <option value="all">All</option>
-              <option value="api">Api</option>
-              <option value="created">Created</option>
-            </select>
-
+      
 
 
         <span className="span">Order by Recipe Name</span>
-        <select onChange={(n) => handleSelectByName(n)}>
-          <option value="default">All</option>
+        <select id='orderAlpha' onChange={(n) => handleSelectByName(n)}>
+        <option value="unordered" disabled hidden>All</option>
+          <option value="All">All</option>
           <option value="A-Z">A-Z</option>
           <option value="Z-A">Z-A</option>
         </select>
 
 
-        <span className="span">Order by Score</span>
-        <select onChange={(s) => handleSelectByScore(s)}>
-          <option value="All">All</option>
-          <option value="Asc">Highest Score</option>
-          <option value="Desc">Lowest Score</option>
+       
+
+        <span  className="span">Order by Score</span>
+        <select id='orderScore' onChange={(s) => handleSelectByScore(s)}>
+        <option value="unordered" disabled hidden>All</option>
+        <option value="All">All</option>
+        <option value="Asc">Highest Score</option>
+        <option value="Desc">Lowest Score</option>
         </select>
 
 
         <span className="span">Filter by Type of diet</span>
-        <select onChange={(e) => handleSelectTypeOfDiet(e)}>
+        <select id='orderDiets' onChange={(e) => handleSelectTypeOfDiet(e)}>
           <option value="default">All Diets</option>
 
           {diets.map((d) => (

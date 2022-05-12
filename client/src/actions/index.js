@@ -1,9 +1,5 @@
 import axios from "axios";
 
-
-
-
-
 export const GET_RECIPES = "GET_RECIPES";
 export const FILTER_BY_DIET = "FILTER_BY_DIET";
 export const GET_TYPES_OF_DIET = "GET_TYPES_OF_DIET";
@@ -14,26 +10,31 @@ export const GET_DIETS = "GET_DIETS";
 export const POST_RECIPE = "POST_RECIPE";
 export const GET_DETAIL = "GET_DETAIL";
 export const CLEAR_DETAILS = 'CLEAR_DETAILS';
-export const GET_DB = "GET_DB"
 
+
+
+// manejo de errores desde el front
 export const ERROR_OCURRED = 'ERROR_OCURRED';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 
+//paginacion
 export const PAG_INDEXES = 'PAG_INDEXES';
 
+// para hacerla c r u d
 export const DELETE_RECIPE = "DELETE_RECIPE";
 
 export const UPDATE_RECIPE = "UPDATE_RECIPE"
 
+//  -------------------------------------- //
 
 
-
-//aca es donde ocurre la magia (?) en este lugar le pego a los endpoints de mi backend, conectando asi el front con mi back
+//aca es donde ocurre la magia (?) en este lugar le pego a los endpoints de mi backend
+// conectando asi el front con mi back
 
 export function getRecipes() {
   return async function (dispatch) {
 
-    //var json = await axios.get("http://localhost:3001/recipes");
+  
     return fetch("http://localhost:3001/recipes")
     .then (response => {
       if (!response.ok) throw Error (response.status)
@@ -42,9 +43,12 @@ export function getRecipes() {
     .then(json => {
       dispatch({type: GET_RECIPES, payload: json})
     })
-    .catch(error => dispatch({type: ERROR_OCURRED, payload: error.toString()}, console.log("Error, could not get recipes, due to a connection problem")))
+    .catch(error => dispatch({type: ERROR_OCURRED, payload: error.toString()},
+     console.log("Error, could not get recipes, due to a connection problem")))
   };
 }
+
+
 
 
 
@@ -75,6 +79,7 @@ export function clearError()  {
   }
 }
 
+//paginacion
 export const setPagIndexes = (indexOfLastRecipe, indexOfFirstRecipe) => {
   return { type: PAG_INDEXES, payload: { indexOfLastRecipe, indexOfFirstRecipe } };
 };
@@ -88,13 +93,7 @@ export function filterByDiet(diets) {
 }
 
 
-export function getDB(payload) {
-  return {
-    type: "GET_DB",
-    payload,
-    
-  };
-}
+
 
 
 export function orderByName(payload) {
@@ -178,6 +177,8 @@ export function clearDetails () {
   }
 }
 
+
+// para el c r u d
 export const deleteRecipe = (id) => {
   return async function (dispatch) {
     try{

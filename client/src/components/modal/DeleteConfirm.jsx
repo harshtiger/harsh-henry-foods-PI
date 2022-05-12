@@ -16,27 +16,6 @@ const Content = styled.div`
     border-radius: 15px;
 `;
 
-const Span = styled.span`
-    background-color: #41414100;
-    border: 1px solid #414141;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    width: 30px;
-    height: 30px;
-    color: #FF9911;
-    border-radius: 99px;
-    float: right;
-    font-size: 20px;
-    font-weight: bold;
-    &:hover{ 
-    color: #FF9911;
-    background-color: #414141;
-    
-    text-decoration: none;
-    cursor: pointer;
-    }
-`;
 
 const Img = styled.img `
 
@@ -56,7 +35,7 @@ padding-right: 25px;
 
 
 
-const DeleteConfirm = ({ text, acceptText, cancelText, acceptPopUp, cancelPopUp, show,  setShow }) => {
+const DeleteConfirm = ({ text, acceptPopUp, cancelPopUp, show}) => {
 
     const Modaldiv = styled.div`
     display: ${show ? 'block': 'none'};
@@ -104,7 +83,7 @@ margin-bottom: 5px;
     return(
         <Modaldiv>
             <Content><h1><Img src= "https://i.ibb.co/VC2NbrX/404harsh.png" alt="harshfood" border="0" /></h1>
-            <Span onClick={e => setShow(false)}> x</Span>
+            
                 {text} 
                 <ModalButYes onClick={acceptPopUp}>Yes, DELETE</ModalButYes>
                 <ModalButYes onClick={cancelPopUp}>No, Cancel</ModalButYes>

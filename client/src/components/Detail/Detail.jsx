@@ -6,30 +6,29 @@ import { getDetail, clearDetails, deleteRecipe, updateRecipe, clearError } from 
 import {  useParams  } from "react-router";
 import { Link, useHistory  } from "react-router-dom";
 import "./Detail.css";
+
+// adicionales
 import Loading from "../loading/Loading";
 import DeleteConfirm from "../modal/DeleteConfirm"
 import Modal from "../modal/Modal";
 
 
 
-
-
-
-
 export default function Detail(props) {
-  console.log(props);
+  
   const dispatch = useDispatch();
   const [/*cambio*/, setCambio] = useState(false);
   const detail = useSelector((state) => state.detail);
-  const error = useSelector(state => state.error);
 
+  // manejo de errores
+  const error = useSelector(state => state.error);
   const [popUp, setPopUp] = useState(false);
 
   
   
   const { id } = useParams();
 
-  //const navigate = useNavigate();
+  
   const history = useHistory()
 
   useEffect(() => {
@@ -65,8 +64,7 @@ export default function Detail(props) {
 
   //cancel? ok
   function cancelPopUp() {
-    //dispatch(deleteRecipe(id));
-    setPopUp(false);
+  setPopUp(false);
   }
 
   const handleUpdata = () => {
