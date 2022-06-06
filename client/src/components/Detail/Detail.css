@@ -93,3 +93,8 @@ h2 {
   border: solid 6px rgb(255,153,0);
 
 }
+
+.details   li {
+
+  word-wrap: break-word 
+}

@@ -5,7 +5,7 @@ import "./Paginate.css";
 export default function Paginates({currentPage, 
    recipesPerPage, allRecipes, paginate, handleNext,
     handleSupNext,handleSupPrev, handlePrev, maxPageDisplay,
-     minPageDisplay}) {
+     minPageDisplay, lastpage}) {
   
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(allRecipes / recipesPerPage); i++) {
@@ -19,8 +19,13 @@ export default function Paginates({currentPage,
         <p></p>
       ) : (
         <nav className="btnPag">
-          <button className="pgB" onClick={handleSupPrev}>First Page</button>
-          <button className="pgB" onClick={handlePrev}>{"<"}</button>
+          { currentPage !== 1 ? (
+          <><button className="pgB" onClick={handleSupPrev}>First Page</button>
+          <button className="pgB" onClick={handlePrev}>{"<"}</button></>
+
+     ): (
+      <div></div>
+    )}
           {pageNumbers?.map(number => {
             if (number <= maxPageDisplay && number >= minPageDisplay) {
               return (
@@ -29,6 +34,7 @@ export default function Paginates({currentPage,
                   id={number}
                   className={currentPage === number ? "active" : null}
                   onClick={() => paginate(number)}
+
                 >
                   {number}
                 </button>
@@ -37,10 +43,14 @@ export default function Paginates({currentPage,
               return null;
             }
           })}
-          <button className="pgB" disabled={currentPage === Math.ceil(allRecipes / recipesPerPage)}
-          onClick={handleNext}>{">"}</button>
-          <button className="pgB" disabled={currentPage === Math.ceil(allRecipes / recipesPerPage)}
-           onClick={handleSupNext}>Last Page</button>
+          
+          { !parseInt(currentPage) !== parseInt(lastpage) ? (
+          <><button className="pgB" disabled={currentPage === Math.ceil(allRecipes / recipesPerPage)}
+                onClick={handleNext}>{">"}</button><button className="pgB" disabled={currentPage === Math.ceil(allRecipes / recipesPerPage)}
+                  onClick={handleSupNext}>Last Page</button></>
+           ): (
+            <div></div>
+          )}
         </nav>
       )}
     </nav>

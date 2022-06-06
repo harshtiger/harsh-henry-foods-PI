@@ -15,9 +15,19 @@ function validate(input) {
   input.summary
     ? (errors.summary = "")
     : (errors.summary = "You must provide a summary");
+    input.analyzedInstructions 
+    ?(errors.analyzedInstructions = "")
+    :(errors.analyzedInstructions = "Enter a description");
+   
   input.diets.length < 1
     ? (errors.diets = "Choose at least one diet")
     : (errors.diets = "");
+    parseInt(input.aggregateLikes) <= 1
+   ? (errors.aggregateLikes = "Cant take a number bellow 1")
+   :(errors.aggregateLikes = "");
+   parseInt(input.healthScore) <= 1
+   ? (errors.healthScore = "Cant take a number bellow 1")
+   :(errors.healthScore ="")
   if (!input.image.includes("https://") && !input.image.includes("http://")) {
     errors.image = "This isn't a valid image address";
   } else {
@@ -94,7 +104,7 @@ const clearErrors2 = () => {  // manejo de errores para la ventana modal
         diets: [...input.diets, e.target.value],
       })
     ); 
-    if(!diets.includes(e.target.value)){
+    if(!input.diets.includes(e.target.value)){
     setInput((input) => ({
       ...input,
       diets: [...input.diets, e.target.value],
@@ -110,27 +120,27 @@ const clearErrors2 = () => {  // manejo de errores para la ventana modal
       diets: input.diets.filter((diet) => diet !== d),
     });
   }
-
  
 
   function handleSubmit(e) {
     
-    
+    console.log(errors.analyzedInstructions)
     
 
-    if (!input.title || !input.summary || !input.image || input.diets.length === 0)  {
+    if (!input.title || !input.summary || !input.image||  !input.analyzedInstructions || input.diets.length === 0 || Number(input.aggregateLikes) <= 0 || Number(input.healthScore) <= 0)  {
      
       setPopUp2(()=> true)
 
       e.preventDefault();
       
       
-      console.log(popUp2)
+      //console.log(popUp2)
       
      // alert("You must complete every field!!");
     }
     
-    if (input.title && input.summary && input.image && input.diets.length > 0) {
+     else if (input.title && input.summary&& input.analyzedInstructions  && input.image && input.diets.length  > 0 && Number(input.aggregateLikes) > 0 && Number(input.healthScore) > 0)
+     {
       e.preventDefault();
       
       if( id === undefined){
@@ -246,30 +256,36 @@ const clearErrors2 = () => {  // manejo de errores para la ventana modal
             {errors.summary && <p>{errors.summary}</p>}
           </div>
           <div>
+          
             <label>Score:</label>
             <input
               className="inputCreate"
               type="number"
               value={input.aggregateLikes}
               name="aggregateLikes"
-              min="0"
+             
               max="10000"
               onChange={(e) => handleChange(e)}
 
             />
+            {errors.aggregateLikes && <p>{errors.aggregateLikes}</p>}
           </div>
           <div>
+          
             <label>Health Level:</label>
             <input
               className="inputCreate"
               type="number"
               value={input.healthScore}
               name="healthScore"
-              min="0"
+              
               max="10000"
               onChange={(e) => handleChange(e)}
             />
+            {errors.healthScore && <p>{errors.healthScore}</p>}
           </div>
+
+          
           <div>
             <label className="labelInstr">Instructions:</label>
             <textarea
@@ -281,7 +297,11 @@ const clearErrors2 = () => {  // manejo de errores para la ventana modal
               name="analyzedInstructions"
               onChange={(e) => handleChange(e)}
             />
+          
+            {errors.analyzedInstructions && <p>{errors.analyzedInstructions}</p>}
           </div>
+
+
           <div>
             <label>Image:</label>
             <input
