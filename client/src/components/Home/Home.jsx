@@ -307,8 +307,8 @@ console.log(lastpage.length)
                  }   
 
                 diets={c.createdDb
-                    ? c.diets.map((d) => ( <p key={d.name} className="dietsMap">{d.name}</p>))
-                    : c.diets.map((d) => ( <p key={d} className="dietsMap">{d}</p>))
+                    ? c.diets?.map((d) => ( <p key={d.name} className="dietsMap">{d.name}</p>))
+                    : c.diets?.map((d) => ( <p key={d} className="dietsMap">{d}</p>))
                      }
 
                 vegetarian={

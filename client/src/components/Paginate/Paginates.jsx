@@ -15,9 +15,7 @@ export default function Paginates({currentPage,
   
   return (
     <nav>
-      {pageNumbers.length === 0 ? (
-        <p></p>
-      ) : (
+      (
         <nav className="btnPag">
           { currentPage !== 1 ? (
           <><button className="pgB" onClick={handleSupPrev}>First Page</button>

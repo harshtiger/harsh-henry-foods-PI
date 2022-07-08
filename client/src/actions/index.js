@@ -151,6 +151,7 @@ export function postRecipe(payload) {
       json,
     };
   } catch (error){
+    console.log("No se pudo crear jaja");
     payload({type: ERROR_OCURRED, payload: error.toString()})
   }
   };

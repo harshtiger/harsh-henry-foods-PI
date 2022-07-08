@@ -123,6 +123,8 @@ const clearErrors2 = () => {  // manejo de errores para la ventana modal
  
 
   function handleSubmit(e) {
+
+    
     
     console.log(errors.analyzedInstructions)
     
@@ -260,8 +262,8 @@ const clearErrors2 = () => {  // manejo de errores para la ventana modal
             <label>Score:</label>
             <input
               className="inputCreate"
-              type="number"
-              value={input.aggregateLikes}
+              type="text"
+              value={parseInt(input.aggregateLikes)}
               name="aggregateLikes"
              
               max="10000"

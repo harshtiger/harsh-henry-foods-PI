@@ -80,7 +80,7 @@ export default function Detail(props) {
       {error && <Modal show={true} setShow={clearErrors} message={"There was a problem with your Recipe ID. Lets go back"} />}
       {detail.length ? 
       <><div>
-          <Link to="/home">
+          <Link to="/home"> 
             <button>Back to Home</button>
           </Link>
 
