@@ -16,7 +16,6 @@ const putRecipe = async (req, res) => {
         analyzedInstructions: req.body.analyzedInstructions,
         image: req.body.image,
         diets: req.body.diets,
-       
         });
       
       res.send(updatedRecipe);

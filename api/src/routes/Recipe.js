@@ -16,8 +16,10 @@ router.post("/", async (req, res) => {
       image,
       diets,
     } = req.body;
-    if (!title || !summary) {
-      return res.json("Title and summary are required to create a recipe");
+    if (!title || !summary || !aggregateLikes || !healthScore|| !analyzedInstructions || !image || !diets)  {
+      console.log("No se pudo crear jaja")
+      return res.json("Missing information for creating a recipe detected");
+      
     }
     let recipeCreated = await Recipe.create({
       title,

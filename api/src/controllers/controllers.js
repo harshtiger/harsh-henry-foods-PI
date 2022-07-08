@@ -1,17 +1,17 @@
 const axios = require("axios");
 const { Recipe, Diet } = require("../db");
 const { API_KEY } = process.env;
+const data = require ("../../fake.json")
 
 
 
-  const getApiInfo = async () => {
-    
+ const getApiInfo = async () => {
 
-    
-    const apiInfo = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=10`
-    );
-    return apiInfo.data.results;
+  
+        
+    const apiInfo = data.results
+   
+    return apiInfo
     
   };
   
@@ -34,10 +34,6 @@ const { API_KEY } = process.env;
     return totalInfo;
   }; 
 
-  
+   
 
-  
-
-  module.exports ={
-      getAllRecipes
-  }
+  module.exports ={getAllRecipes}

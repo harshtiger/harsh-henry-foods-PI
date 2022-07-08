@@ -12,7 +12,7 @@ describe("Recipe model", () => {
     describe("Title", () => {
       it("Should throw an error if title is null", (done) => {
         Recipe.create({
-          summary: "Churrascos de carne rebosados en pan rayado con guevito,se hace frito o al horno",
+          summary: "Churrascos de carne rebosados en pan rayado con guebo,se hace frito o al horno",
         })
           .then(() => done(new Error("It requires a valid title")))
           .catch(() => done());
