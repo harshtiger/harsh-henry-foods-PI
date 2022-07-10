@@ -7,7 +7,7 @@ export default function LandingPage() {
   return (
     <div className="landing">
 
-      <h1>Dinner time! <img src="https://i.ibb.co/FV56Lkx/harshfood.png" 
+      <h1 className="title">Dinner time! <img className="imag" src="https://i.ibb.co/FV56Lkx/harshfood.png" 
       alt="harshfood" border="0" /> 
       </h1>
       

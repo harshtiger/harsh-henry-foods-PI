@@ -6,7 +6,7 @@
  
   width: 100%;
   height: auto;
-  position:initial;
+  position:fixed;
   background-color: black;
   background-image: url("../../assets/bbck.jpg"); 
     
