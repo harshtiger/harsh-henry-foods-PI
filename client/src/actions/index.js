@@ -35,7 +35,7 @@ export function getRecipes() {
   return async function (dispatch) {
 
   
-    return fetch("http://localhost:3001/recipes")
+    return fetch("https://harsh-food-api.herokuapp.com/recipes")
     .then (response => {
       if (!response.ok) throw Error (response.status)
       return response.json()
@@ -55,7 +55,7 @@ export function getRecipes() {
 export function getTypesOfDiet() {
   return async function (dispatch) {
     try {
-      var json = await fetch("http://localhost:3001/types")
+      var json = await fetch("https://harsh-food-api.herokuapp.com/types")
 
       .then(response => {
         if(!response.ok) throw Error(response.status);
@@ -114,7 +114,7 @@ export function getNameRecipe(name) {
   return async function (dispatch) {
     try {
       const json = await axios.get(
-        "http://localhost:3001/recipes?name=" + name
+        "https://harsh-food-api.herokuapp.com/recipes?name=" + name
 
         );
       return dispatch({
@@ -131,7 +131,7 @@ export function getNameRecipe(name) {
 export function getDiets() {
   return async function (dispatch) {
     try{
-    var json = await axios.get("http://localhost:3001/types");
+    var json = await axios.get("https://harsh-food-api.herokuapp.com/types");
     return dispatch({
       type: "GET_DIETS",
       payload: json.data,
@@ -145,7 +145,7 @@ export function getDiets() {
 
 export function postRecipe(payload) {
   return async function () {
-   try { const json = await axios.post("http://localhost:3001/recipe", payload);
+   try { const json = await axios.post("https://harsh-food-api.herokuapp.com/recipe", payload);
     return {
       type: "POST_RECIPE",
       json,
@@ -161,7 +161,7 @@ export function getDetail(id) {
   return async function (dispatch) {
     try {
       
-      let json = await axios.get("http://localhost:3001/recipes/" + id);
+      let json = await axios.get("https://harsh-food-api.herokuapp.com/" + id);
       return dispatch({
         type: "GET_DETAIL",
         payload: json.data,
@@ -183,7 +183,7 @@ export function clearDetails () {
 export const deleteRecipe = (id) => {
   return async function (dispatch) {
     try{
-    await axios.delete(`http://localhost:3001/recipe?id=${id}`);
+    await axios.delete(`https://harsh-food-api.herokuapp.com/recipe?id=${id}`);
     return dispatch({
       type: "DELETE_RECIPE",
     });
@@ -197,7 +197,7 @@ export const deleteRecipe = (id) => {
 export const updateRecipe = (id, data) => {
   return async function (dispatch) {
     try{
-    await axios.put(`http://localhost:3001/recipe/${id}`, data);
+    await axios.put(`https://harsh-food-api.herokuapp.com/recipe/${id}`, data);
     return dispatch({
       type: "UPDATE_RECIPE",
     });
